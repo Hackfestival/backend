@@ -1,3 +1,23 @@
+{#<!-- templates/base.html -->#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    {% load static %}#}
+{#    <title>{% block title %}My Site{% endblock %}</title>#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#    <div class="top-bar">#}
+{#        <a href="/">Home</a>#}
+{#        <a href="/profile">Profile</a>#}
+{#        <a href="/logout">Logout</a>#}
+{#    </div>#}
+{#    <div class="content">#}
+{#        {% block content %}{% endblock %}#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +31,36 @@
     <div class="top-bar">
         <a href="/">Home</a>
         <a href="/profile">Profile</a>
-        <a href="/logout">Logout</a>
+
+        {% if user.is_authenticated %}
+            <a href="/logout">Logout</a>
+            <a href="/user/cart/list">
+                Cart (<span id="cart-count">{{ cart_item_count }}</span>)
+            </a>
+        {% else %}
+            <a href="/login">Login</a>
+        {% endif %}
     </div>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- Optional JavaScript to update cart count dynamically -->
+    <script>
+        // Using AJAX to dynamically fetch and update cart count without page reload
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('cart-count')) {
+                fetch('/user/cart/list')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const cartCount = data.products.length;
+                        document.getElementById('cart-count').textContent = cartCount;
+                    }
+                })
+                .catch(error => console.error('Error fetching cart items:', error));
+            }
+        });
+    </script>
 </body>
 </html>

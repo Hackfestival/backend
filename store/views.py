@@ -12,15 +12,25 @@ from .forms import UserRegistrationForm, UserLoginForm, ProductForm, UserCartAdd
 from . import common
 
 
-@csrf_exempt
-@require_http_methods(['GET'])
+# @csrf_exempt
+# @require_http_methods(['GET'])
+# def home(request):
+#     if not request.user.is_authenticated:
+#         return render(request, 'store/index.html')
+#     else:
+#         user_ = CustomUser.objects.get(email=request.user)
+#         return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
 def home(request):
-    if not request.user.is_authenticated:
-        return render(request, 'store/index.html')
-    else:
-        user_ = CustomUser.objects.get(email=request.user)
-        return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
+    cart_item_count = 0
+    if request.user.is_authenticated:
+        user_cart, _ = Cart.objects.get_or_create(user=request.user)
+        cart_item_count = user_cart.cartitem_set.count()  # Count items in the cart
 
+    return render(request, 'store/home.html', {
+        'user': request.user,
+        'farms': Farm.get_all_farms(),
+        'cart_item_count': cart_item_count,
+    })
 
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
