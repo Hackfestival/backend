@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
@@ -456,3 +456,10 @@ def home_view(request):
 
 
     return render(request, 'store/home_map.html', {"farms": filtered_farm_list})
+
+@login_required
+def farm_detail(request, farm_id):
+    # Fetch the farm by its ID
+    farm = get_object_or_404(Farm, farm_id=farm_id)
+
+    return render(request, 'store/farm_detail.html', {'farm': farm})

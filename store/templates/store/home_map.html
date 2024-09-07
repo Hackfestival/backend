@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe); /* Gradient Background */
+            background: linear-gradient(to right, #4facfe, #00f2fe);
             margin: 0;
             padding: 0;
         }
@@ -104,6 +104,7 @@
                 <th>Description</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>More Info</th>
             </tr>
         </thead>
         <tbody>
@@ -113,6 +114,7 @@
                 <td>{{ farm.description }}</td>
                 <td>{{ farm.latitude }}</td>
                 <td>{{ farm.longitude }}</td>
+                <td><a href="{% url 'farm_detail' farm.farm_id %}" class="btn">More Info</a></td>
             </tr>
             {% endfor %}
         </tbody>

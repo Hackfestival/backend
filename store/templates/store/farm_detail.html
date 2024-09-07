@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Details - {{ farm.name }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .farm-info {
+            padding: 20px;
+        }
+
+        .farm-info h3 {
+            margin-bottom: 15px;
+            color: #343a40;
+        }
+
+        .farm-info p {
+            font-size: 1.2em;
+            color: #495057;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #ff5f6d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #ff7f6d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>{{ farm.name }} - Details</h2>
+    <div class="farm-info">
+        <h3>Description</h3>
+        <p>{{ farm.description }}</p>
+
+        <h3>Location</h3>
+        <p>Latitude: {{ farm.latitude }}</p>
+        <p>Longitude: {{ farm.longitude }}</p>
+
+        <h3>Other Info</h3>
+        <p>Owned by: {{ farm.farmer.username }}</p>
+        <!-- Add more fields as needed -->
+    </div>
+
+    <div class="back-btn">
+        <a href="{% url 'home' %}" class="btn">Back to Farms</a>
+    </div>
+</div>
+
+</body>
+</html>

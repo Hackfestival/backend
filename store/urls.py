@@ -23,6 +23,7 @@ urlpatterns = [
 
 
     path('farm/list', views.farm_list, name='farm_list'),
+    path('farm/<uuid:farm_id>/', views.farm_detail, name='farm_detail'),
 
     path('farm/detail', views.farm_detail, name='farm_detail'),
     path('farm/update', views.farm_update, name='farm_update'),
