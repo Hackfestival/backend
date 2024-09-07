@@ -62,6 +62,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_orders(self):
         return Order.objects.filter(user=self)
+    
+    def get_location(self):
+        return self.latitude, self.longitude
 
     def __str__(self):
         return self.email

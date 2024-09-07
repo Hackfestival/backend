@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farms Map</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 500px; /* Adjust the height as needed */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Farms</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for farm in farms %}
+        <tr>
+            <td>{{ farm.name }}</td>
+            <td>{{ farm.description }}</td>
+            <td>{{ farm.latitude }}</td>
+            <td>{{ farm.longitude }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Farms Map</h2>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the map
+        var map = L.map('map').setView([0, 0], 2); // Set initial view
+
+        // Add a tile layer (OpenStreetMap in this case)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add markers for each farm
+        {% for farm in farms %}
+        L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
+            .addTo(map)
+            .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}');
+        {% endfor %}
+    });
+</script>
+
+</body>
+</html>
