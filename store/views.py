@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
@@ -8,27 +9,28 @@ from .forms import FarmForm
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
+
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        user_type = request.POST['user_type']  # buyer or seller
-        user = CustomUser.objects.create_user(username=username, password=password, email = email)
 
-        u = authenticate(request, email=email, password=password)
+        CustomUser.objects.create_user(username=username, password=password, email = email)
 
-        if u:
-            login(request, u)
+        user_authenticated = authenticate(request, email=email, password=password)
+
+        if user_authenticated:
+            login(request, user_authenticated)
             return JsonResponse({'status': 'success'})
 
         return JsonResponse({'status': 'error'})
+    elif request.method == 'GET':
+        return render(request, 'store/register.html')
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
-    return render(request, 'store/register.html')
-
+@login_required
 def add_product(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     if request.method == 'POST':
         name = request.POST['name']
         description = request.POST['description']
@@ -40,10 +42,12 @@ def add_product(request):
 
     return render(request, 'store/add_product.html')
 
+@login_required
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
 
+@login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -57,6 +61,7 @@ def add_to_cart(request, product_id):
     else:
         return render(request, 'store/out_of_stock.html')
 
+@login_required
 def seller_dashboard(request):
     #seller = SellerProfile.objects.get(user=request.user)
     # Get all the order items that contain the seller's products
@@ -68,6 +73,7 @@ def seller_dashboard(request):
 ######## Location CRUD
 ########################
 
+@login_required
 def farm_list(request):
     print(request.user)
     farms = Farm.objects.filter(farmer=request.user)  # Fetch farms for the logged-in user
