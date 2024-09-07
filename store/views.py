@@ -7,9 +7,10 @@ def register(request):
         return redirect('home')
     if request.method == 'POST':
         username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
         user_type = request.POST['user_type']  # buyer or seller
-        user = CustomUser.objects.create_user(username=username, password=password)
+        user = CustomUser.objects.create_user(username=username, password=password, email = email)
 
         return redirect('login')
 
