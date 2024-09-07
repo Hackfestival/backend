@@ -90,6 +90,13 @@
         .btn:hover {
             background-image: linear-gradient(315deg, #ff7f6d 0%, #ffd371 74%);
         }
+
+        /* Smaller button inside popup */
+        .btn-small {
+            font-size: 0.8em; /* Reduced font size */
+            padding: 5px 10px; /* Reduced padding */
+            border-radius: 3px; /* Slightly smaller border-radius */
+        }
     </style>
 </head>
 <body>
@@ -139,11 +146,11 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add markers for each farm
+        // Add markers for each farm with a popup including a "More Info" link
         {% for farm in farms %}
         var marker = L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
             .addTo(map)
-            .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}');
+            .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}<br><a href="{% url "farm_detail" farm.farm_id %}" class="btn btn-small">More Info</a>');
         {% endfor %}
     });
 </script>
