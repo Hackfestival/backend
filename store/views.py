@@ -50,6 +50,9 @@ def user_register(request):
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
