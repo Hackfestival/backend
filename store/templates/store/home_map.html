@@ -99,8 +99,8 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize the map, centering on a default view (set this to user location or first farm location)
-        var map = L.map('map').setView([{{ farms.0.latitude }}, {{ farms.0.longitude }}], 10);
+        // Initialize the map with a default view, we'll adjust the zoom later
+        var map = L.map('map').setView([0, 0], 2); // Start with a neutral view
 
         // Add a tile layer (OpenStreetMap in this case)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -108,14 +108,25 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        // Create an array to hold all the farm markers
+        var markers = [];
+
         // Add markers for each farm with a popup including a "More Info" link
         {% for farm in farms %}
         var marker = L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
-            .addTo(map)
             .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}<br><a href="{% url "farm_detail" farm.farm_id %}" class="btn btn-small">More Info</a>');
+        markers.push(marker);  // Add marker to array
+        marker.addTo(map);  // Add marker to the map
         {% endfor %}
+
+        // Create a feature group containing all markers
+        var group = L.featureGroup(markers);
+
+        // Fit the map to the bounds of the marker group
+        map.fitBounds(group.getBounds());
     });
 </script>
+
 {% endblock %}
 
 {% block content %}
