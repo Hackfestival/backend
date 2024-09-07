@@ -14,15 +14,15 @@
     }).addTo(map);
 
     // Add farm markers to the map
-    var farms = [
-        {% for farm in farms %}
-            {
-                "name": "{{ farm.name }}",
-                "lat": {{ farm.latitude }},
-                "lng": {{ farm.longitude }}
-            }{% if not forloop.last %},{% endif %}
-        {% endfor %}
-    ];
+var farms = [
+    {% for farm in farms %}
+        {
+            "name": "{{ farm.name }}",
+            "lat": {{ farm.latitude }},
+            "lng": {{ farm.longitude }}
+        }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
 
     farms.forEach(function(farm) {
         L.marker([farm.lat, farm.lng]).addTo(map)

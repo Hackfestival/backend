@@ -35,6 +35,10 @@ def user_register(request):
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
+
+            new_user.latitude = 48.8563
+            new_user.longitude = 2.3527
+
             new_user.save()
 
             user_authenticated = authenticate(request, email=new_user.email, password=form.cleaned_data['password'])
@@ -446,8 +450,5 @@ def home_view(request):
         if var < common.default_radius:
             filtered_farm_list.append(frm)
 
-    context = {
-        'filtered_farm_list': filtered_farm_list
-    }
 
-    return render(request, 'store/home_map.html', context)
+    return render(request, 'store/home_map.html', {"farms": filtered_farm_list})
