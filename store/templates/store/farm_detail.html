@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Details - {{ farm.name }}</title>
@@ -40,6 +41,18 @@
             color: #495057;
         }
 
+        .farm-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .farm-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .back-btn {
             display: block;
             text-align: center;
@@ -63,6 +76,11 @@
 
 <div class="container">
     <h2>{{ farm.name }} - Details</h2>
+
+    <div class="farm-image">
+      <img src="{% static 'images/background.jpg' %}" alt="No image sucker">
+    </div>
+
     <div class="farm-info">
         <h3>Description</h3>
         <p>{{ farm.description }}</p>
@@ -73,7 +91,6 @@
 
         <h3>Other Info</h3>
         <p>Owned by: {{ farm.farmer.username }}</p>
-        <!-- Add more fields as needed -->
     </div>
 
     <div class="back-btn">

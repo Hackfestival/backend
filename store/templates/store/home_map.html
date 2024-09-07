@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            background: linear-gradient(to right, #00b09b, #96c93d); /* Green gradient */
             margin: 0;
             padding: 0;
         }
@@ -50,7 +50,7 @@
         }
 
         th {
-            background-color: #007bff;
+            background-color: #28a745; /* Dark green */
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -61,7 +61,7 @@
         }
 
         tr:hover {
-            background-color: #f1f1f1; /* Hover effect */
+            background-color: #e9f7e1; /* Light green hover effect */
         }
 
         #map {
@@ -74,8 +74,8 @@
 
         /* Button Styling */
         .btn {
-            background-color: #ff5f6d;
-            background-image: linear-gradient(315deg, #ff5f6d 0%, #ffc371 74%);
+            background-color: #38b477; /* Green */
+            background-image: linear-gradient(315deg, #38b477 0%, #a3e635 74%); /* Green gradient */
             color: white;
             padding: 10px 20px;
             border: none;
@@ -88,7 +88,7 @@
         }
 
         .btn:hover {
-            background-image: linear-gradient(315deg, #ff7f6d 0%, #ffd371 74%);
+            background-image: linear-gradient(315deg, #5cc674 0%, #c6ec66 74%);
         }
 
         /* Smaller button inside popup */
@@ -102,6 +102,9 @@
 <body>
 
 <div id="container">
+    <h2>Farms Map</h2>
+    <div id="map"></div>
+
     <h2>Farms</h2>
 
     <table>
@@ -127,8 +130,7 @@
         </tbody>
     </table>
 
-    <h2>Farms Map</h2>
-    <div id="map"></div>
+    
 
     <a href="#" class="btn">Back to Home</a>
 </div>
