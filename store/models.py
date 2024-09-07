@@ -60,6 +60,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def get_orders(self):
+        return Order.objects.filter(user=self)
+
     def __str__(self):
         return self.email
 

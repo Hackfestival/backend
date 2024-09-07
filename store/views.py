@@ -1,4 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login
+
 from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm
 from .forms import FarmForm
 
@@ -12,7 +15,13 @@ def register(request):
         user_type = request.POST['user_type']  # buyer or seller
         user = CustomUser.objects.create_user(username=username, password=password, email = email)
 
-        return redirect('login')
+        u = authenticate(request, email=email, password=password)
+
+        if u:
+            login(request, u)
+            return JsonResponse({'status': 'success'})
+
+        return JsonResponse({'status': 'error'})
 
     return render(request, 'store/register.html')
 
