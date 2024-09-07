@@ -1,0 +1,16 @@
+<!-- store/templates/store/farm_update.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Farm</title>
+</head>
+<body>
+    <h2>Update Farm</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!-- store/templates/store/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-background">
+    <div class="content-center">
+        <h2>Welcome, {{ user.username }}</h2>
+
+        <h3>Farms near you:</h3>
+        <ul class="farm-list">
+            {% for farm in farms %}
+                <li>
+                    <button class="farm-button">{{ farm.name }}</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

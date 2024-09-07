@@ -216,6 +216,9 @@ class Cart(models.Model):
 
         return new_order.order_id
 
+    def clear(self):
+        self.list_items().delete()
+
     def __str__(self):
         return f'Cart of {self.user.username}'
 
