@@ -1,4 +1,3 @@
-from crypt import methods
 from datetime import datetime
 from itertools import product
 
@@ -11,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser, Product, Cart, CartItem, Farm, Order
 from . import common
 
+def home(request):
+    return render(request, 'home.html')
 
 @csrf_exempt
 def user_register(request):

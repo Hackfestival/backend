@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Farmers' Market</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <ul class="navbar">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header id="home" class="hero-image">
+        <div class="hero-text">
+            <h1>Welcome to the Local Farmers' Market</h1>
+            <p>Fresh, Organic, and Locally Sourced Food from Our Farmers to Your Table</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We connect you directly with local farmers who grow fresh, sustainable produce. Support your local community by buying food that is not only healthy but also helps reduce your carbon footprint.</p>
+            <img src="{% static 'images/istockphoto-1466631985-612x612.jpg' %}" alt="Local Farmers" class="image-small">
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="{% static 'images/cows-7880154_1280.jpg' %}" alt="Fresh Produce">
+                    <h3>Fresh Vegetables</h3>
+                    <p>Farm fresh veggies grown with love.</p>
+                </div>
+                <div class="product">
+                    <img src="{% static 'images/istockphoto-1466631985-612x612.jpg' %}" alt="Local Farm">
+                    <h3>Organic Fruits</h3>
+                    <p>Hand-picked, delicious, and organic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2024 Local Farmers' Market. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
