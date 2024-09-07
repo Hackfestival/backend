@@ -38,6 +38,8 @@
 <h2>Farms Map</h2>
 <div id="map"></div>
 
+
+
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
@@ -52,11 +54,35 @@
         }).addTo(map);
 
         // Add markers for each farm
+        var markers = [];
         {% for farm in farms %}
-        L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
+        var marker = L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
             .addTo(map)
             .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}');
+        markers.push(marker);
         {% endfor %}
+
+        // Function to filter farms based on category selection
+        window.filterFarms = function() {
+            var categorySelect = document.getElementById('categorySelect');
+            var temp = categorySelect.value; // Get the selected category value
+
+            console.log("Selected Category:", temp);
+
+            // Clear all existing markers from the map
+            markers.forEach(function(marker) {
+                map.removeLayer(marker);
+            });
+
+            // Optionally: Here you could use `temp` to filter farms by category
+            // and only display the filtered farms on the map.
+            // For now, we will re-add all markers:
+            markers.forEach(function(marker) {
+                map.addLayer(marker);
+            });
+
+            // Perform any additional logic with the selected category here
+        };
     });
 </script>
 

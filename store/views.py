@@ -2,8 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 
-from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm
+from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm, Category
 from .forms import FarmForm
+import json
 from . import common
 
 def register(request):
@@ -92,7 +93,3 @@ def get_list_of_nearby_farms(request):
 
     return render(request, 'store/nearby_farm.html', {'farms': filtered_farm_list})
 
-def category_filter(request):
-    farms = Farm.get_all_categories()
-
-    
