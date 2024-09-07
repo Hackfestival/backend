@@ -1,7 +1,7 @@
 [
     {
         "model": "store.customuser",
-        "pk": "f1bada6d-4e59-4d50-bb3d-1de9e7dbe5b9",
+        "pk": "1fa707c5-68e9-4d2d-8b97-dfa43e564bc5",
         "fields": {
             "email": "farmer1@example.com",
             "username": "farmer1",
@@ -17,7 +17,7 @@
     },
     {
         "model": "store.customuser",
-        "pk": "1c707c54-68e9-4d2d-8b97-dfa43e564bc2",
+        "pk": "3b43e123-92e9-46d7-8f17-dba43e5a4ac7",
         "fields": {
             "email": "farmer2@example.com",
             "username": "farmer2",
@@ -33,7 +33,7 @@
     },
     {
         "model": "store.customuser",
-        "pk": "b7bc8261-6830-4872-b8a9-f5dba39e6e42",
+        "pk": "22fdb7da-2bde-4ef8-b10d-c703456e0cf6",
         "fields": {
             "email": "buyer1@example.com",
             "username": "buyer1",
@@ -49,7 +49,7 @@
     },
     {
         "model": "store.customuser",
-        "pk": "cc707c54-68e9-4d2d-8b97-dfa43e564bc3",
+        "pk": "a5b4c71a-9d57-44bb-b8fa-378f8cfbd556",
         "fields": {
             "email": "farmer3@example.com",
             "username": "farmer3",
@@ -65,7 +65,7 @@
     },
     {
         "model": "store.customuser",
-        "pk": "dc709c55-68e9-4d2d-8b98-dfa43e564bc4",
+        "pk": "4eafadcb-92b8-4c4a-907a-12c4e09f03df",
         "fields": {
             "email": "buyer2@example.com",
             "username": "buyer2",
@@ -81,51 +81,51 @@
     },
     {
         "model": "store.farm",
-        "pk": "a6a42c15-8d4a-4700-b2e1-7d382d72c6c1",
+        "pk": "7eafadcb-12b8-4c4a-907a-12c4e09f03d1",
         "fields": {
             "name": "Green Valley Farm",
             "description": "Sustainable farm with organic vegetables.",
             "latitude": 40.7130,
             "longitude": -74.0100,
-            "farmer": "f1bada6d-4e59-4d50-bb3d-1de9e7dbe5b9"
+            "farmer": "1fa707c5-68e9-4d2d-8b97-dfa43e564bc5"
         }
     },
     {
         "model": "store.farm",
-        "pk": "b7ac8261-6830-4872-b8a9-f5dba39e6e43",
+        "pk": "8f4badcb-32b8-4c4a-907a-12c4e09f03d2",
         "fields": {
             "name": "Sunny Hills Ranch",
             "description": "Raising organic chickens and eggs.",
             "latitude": 34.0522,
             "longitude": -118.2437,
-            "farmer": "1c707c54-68e9-4d2d-8b97-dfa43e564bc2"
+            "farmer": "3b43e123-92e9-46d7-8f17-dba43e5a4ac7"
         }
     },
     {
         "model": "store.farm",
-        "pk": "c8ac8261-6830-4872-b8a9-f5dba39e6e44",
+        "pk": "9b5fadcb-42b8-4c4a-907a-12c4e09f03d3",
         "fields": {
             "name": "Blue Moon Dairy",
             "description": "Specializing in fresh organic dairy products.",
             "latitude": 41.9028,
             "longitude": 12.4964,
-            "farmer": "cc707c54-68e9-4d2d-8b97-dfa43e564bc3"
+            "farmer": "a5b4c71a-9d57-44bb-b8fa-378f8cfbd556"
         }
     },
     {
         "model": "store.farm",
-        "pk": "d9ac8261-6830-4872-b8a9-f5dba39e6e45",
+        "pk": "c6e6adcb-52b8-4c4a-907a-12c4e09f03d4",
         "fields": {
             "name": "Happy Fields Farm",
             "description": "Organic fruits and vegetables farm.",
             "latitude": 48.8566,
             "longitude": 2.3522,
-            "farmer": "dc709c55-68e9-4d2d-8b98-dfa43e564bc4"
+            "farmer": "4eafadcb-92b8-4c4a-907a-12c4e09f03df"
         }
     },
     {
         "model": "store.category",
-        "pk": "c7d13d4c-d93b-4e55-9b4a-f49e995d14aa",
+        "pk": "d7d13d4c-d93b-4e55-9b4a-f49e995d14aa",
         "fields": {
             "name": "Vegetables",
             "description": "Fresh organic vegetables."
@@ -133,7 +133,7 @@
     },
     {
         "model": "store.category",
-        "pk": "d8d13d4c-d93b-4e55-9b4a-f49e995d14bb",
+        "pk": "e8d13d4c-d93b-4e55-9b4a-f49e995d14bb",
         "fields": {
             "name": "Fruits",
             "description": "Organic and juicy fruits."
@@ -141,7 +141,7 @@
     },
     {
         "model": "store.category",
-        "pk": "e9d13d4c-d93b-4e55-9b4a-f49e995d14cc",
+        "pk": "f9d13d4c-d93b-4e55-9b4a-f49e995d14cc",
         "fields": {
             "name": "Dairy",
             "description": "Organic milk and dairy products."
@@ -149,85 +149,25 @@
     },
     {
         "model": "store.product",
-        "pk": "1fa707c54-68e9-4d2d-8b97-dfa43e564bc5",
+        "pk": "01a707c5-58e9-4d2d-8b97-dfa43e564bc5",
         "fields": {
             "name": "Organic Carrots",
             "description": "Fresh organic carrots from Green Valley Farm.",
             "price": "3.99",
             "stock": 100,
-            "category": "c7d13d4c-d93b-4e55-9b4a-f49e995d14aa",
-            "seller": "a6a42c15-8d4a-4700-b2e1-7d382d72c6c1"
+            "category": "d7d13d4c-d93b-4e55-9b4a-f49e995d14aa",
+            "seller": "7eafadcb-12b8-4c4a-907a-12c4e09f03d1"
         }
     },
     {
         "model": "store.product",
-        "pk": "2fa707c54-68e9-4d2d-8b97-dfa43e564bc6",
+        "pk": "02b707c5-68e9-4d2d-8b97-dfa43e564bc6",
         "fields": {
             "name": "Free-Range Eggs",
             "description": "Organic free-range eggs from Sunny Hills Ranch.",
             "price": "6.99",
             "stock": 50,
-            "category": "e9d13d4c-d93b-4e55-9b4a-f49e995d14cc",
-            "seller": "b7ac8261-6830-4872-b8a9-f5dba39e6e43"
+            "category": "f9d13d4c-d93b-4e55-9b4a-f49e995d14cc",
+            "seller": "8f4badcb-32b8-4c4a-907a-12c4e09f03d2"
         }
-    },
-    {
-        "model": "store.product",
-        "pk": "3fa707c54-68e9-4d2d-8b97-dfa43e564bc7",
-        "fields": {
-            "name": "Organic Milk",
-            "description": "Fresh organic milk from Blue Moon Dairy.",
-            "price": "4.50",
-            "stock": 200,
-            "category": "e9d13d4c-d93b-4e55-9b4a-f49e995d14cc",
-            "seller": "c8ac8261-6830-4872-b8a9-f5dba39e6e44"
-        }
-    },
-    {
-        "model": "store.order",
-        "pk": "4fa707c54-68e9-4d2d-8b97-dfa43e564bc8",
-        "fields": {
-            "user": "b7bc8261-6830-4872-b8a9-f5dba39e6e42",
-            "created_at": "2024-01-10T12:00:00Z"
-        }
-    },
-    {
-        "model": "store.orderitem",
-        "pk": "5fa707c54-68e9-4d2d-8b97-dfa43e564bc9",
-        "fields": {
-            "order": "4fa707c54-68e9-4d2d-8b97-dfa43e564bc8",
-            "product": "1fa707c54-68e9-4d2d-8b97-dfa43e564bc5",
-            "quantity": 5,
-            "unit": "kg",
-            "price": "3.99"
-        }
-    },
-    {
-        "model": "store.deliveryorder",
-        "pk": "6fa707c54-68e9-4d2d-8b97-dfa43e564bca",
-        "fields": {
-            "order": "4fa707c54-68e9-4d2d-8b97-dfa43e564bc8",
-            "delivery_address": "123 Main St, New York, NY",
-            "delivery_time": "2024-01-12T12:00:00Z",
-            "delivery_fee": "10.00"
-        }
-    },
-    {
-        "model": "store.cart",
-        "pk": "7fa707c54-68e9-4d2d-8b97-dfa43e564bcb",
-        "fields": {
-            "user": "b7bc8261-6830-4872-b8a9-f5dba39e6e42",
-            "created_at": "2024-01-05T12:00:00Z"
-        }
-    },
-    {
-        "model": "store.cartitem",
-        "pk": "8fa707c54-68e9-4d2d-8b97-dfa43e564bcc",
-        "fields": {
-            "cart": "7fa707c54-68e9-4d2d-8b97-dfa43e564bcb",
-            "product": "3fa707c54-68e9-4d2d-8b97-dfa43e564bc7",
-            "quantity": 3,
-            "unit": "kg"
-        }
-    }
-]
+    }]
