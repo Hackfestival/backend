@@ -1,0 +1,152 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #4CAF50;
+  padding: 10px 0;
+}
+
+.navbar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.navbar li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.navbar li a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section (Header) */
+.hero-image {
+  position: relative;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-image::before {
+  content: '';
+  background-image: url('../images/istockphoto-1466631985-612x612.jpg');
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+}
+
+.hero-text p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+/* About Us Section */
+.about-us {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.image-small {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+/* Products Section */
+.products {
+  padding: 40px 0;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.product-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.product {
+  width: 30%;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Footer */
+footer {
+  padding: 20px 0;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+.navbar-right {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-right li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.navbar-right li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.navbar-right li a:hover {
+  text-decoration: underline;
+}
