@@ -69,6 +69,6 @@ def seller_dashboard(request):
 ########################
 
 def farm_list(request):
-    print(request.user)
-    farms = Farm.objects.filter(farmer=request.user)  # Fetch farms for the logged-in user
+    farms = Farm.get_all_farms() # Fetch farms for the logged-in user
+    print(f"Farm: {farms}")
     return render(request, 'store/farm_list.html', {'farms': farms})
