@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
@@ -22,6 +22,60 @@ def home(request):
         return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
 
 
+@login_required
+def user_cart_list(request):
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    return render(request, 'store/cart.html', {'cart': cart})
+
+
+# Add a product to the cart
+@login_required
+def user_cart_add(request, product_id):
+    product = get_object_or_404(Product, product_id=product_id)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    # Check if item already exists in cart
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect('user_cart_list')
+
+
+# Remove a product from the cart
+@login_required
+def user_cart_remove(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, cart_item_id=cart_item_id)
+
+    # Reduce quantity or remove item completely
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect('user_cart_list')
+
+
+# Clear the entire cart
+@login_required
+def user_cart_clear(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    cart.items.all().delete()
+    return redirect('user_cart_list')
+
+
+# Checkout view
+@login_required
+def user_cart_checkout(request):
+    cart = get_object_or_404(Cart, user=request.user)
+
+    if request.method == 'POST':
+        # Mock checkout, in real life you would handle payments here
+        order = cart.checkout()
+        return render(request, 'store/payment_success.html', {'order_id': order})
+
+    return render(request, 'store/checkout.html', {'cart': cart})
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])
 def user_register(request):

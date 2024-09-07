@@ -12,9 +12,15 @@
         <a href="/">Home</a>
         <a href="/profile">Profile</a>
         <a href="/logout">Logout</a>
+
+        <!-- Add the Cart button with dynamic item count -->
+        <a href="{% url 'view_cart' %}" class="cart-button">
+            Cart ({{ cart_item_count }} items)
+        </a>
     </div>
+
     <div class="content">
-        {% block content %}{% endblock %}
+        {% block user_cart_list %}{% endblock %}
     </div>
 </body>
 </html>

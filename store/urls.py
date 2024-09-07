@@ -20,7 +20,12 @@ urlpatterns = [
     path('user/cart/checkout', views.user_cart_checkout, name='user_cart_checkout'),
     path('user/order/list', views.user_order_list, name='user_order_list'),
     path('user/farm/nearby', views.user_farm_nearby, name='user_farm_nearby'),
-
+    path('cart/', views.user_cart_list, name='user_cart_list'),
+    path('cart/add/<uuid:product_id>/', views.user_cart_add, name='user_cart_add'),
+    path('cart/remove/<uuid:cart_item_id>/', views.user_cart_remove, name='user_cart_remove'),
+    path('cart/clear/', views.user_cart_clear, name='user_cart_clear'),
+    path('cart/checkout/', views.user_cart_checkout, name='user_cart_checkout'),
+    path('cart/add/<uuid:product_id>/', views.user_cart_add, name='user_cart_add'),
 
     path('farm/list', views.farm_list, name='farm_list'),
 

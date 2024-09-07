@@ -1,0 +1,24 @@
+<!-- templates/store/checkout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <ul>
+        {% for item in cart.list_items %}
+            <li>{{ item.quantity }} {{ item.unit }} of {{ item.product.name }} - ${{ item.product.price }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total: ${{ cart.get_total }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Complete Purchase</button>
+    </form>
+
+    <a href="{% url 'user_cart_list' %}">Go Back to Cart</a>
+</body>
+</html>
