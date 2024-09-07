@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
@@ -35,6 +35,10 @@ def user_register(request):
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
+
+            new_user.latitude = 48.8563
+            new_user.longitude = 2.3527
+
             new_user.save()
 
             user_authenticated = authenticate(request, email=new_user.email, password=form.cleaned_data['password'])
@@ -453,3 +457,27 @@ def farm_page(request, farm_id):
     print(products)
 
     return render(request, 'store/farm_page.html', {'farm': farm, 'products': products})
+def home_view(request):
+
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+
+    c_user = CustomUser.objects.get(email=request.user)
+    user_location = c_user.get_location()
+    farms = Farm.get_all_farms()  # Fetch farms for the logged-in user
+    filtered_farm_list = []
+
+    for frm in farms:
+        var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
+        if var < common.default_radius:
+            filtered_farm_list.append(frm)
+
+
+    return render(request, 'store/home_map.html', {"farms": filtered_farm_list})
+
+@login_required
+def farm_detail(request, farm_id):
+    # Fetch the farm by its ID
+    farm = get_object_or_404(Farm, farm_id=farm_id)
+
+    return render(request, 'store/farm_detail.html', {'farm': farm})
