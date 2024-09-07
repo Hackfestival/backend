@@ -7,7 +7,9 @@ from django.contrib.auth import authenticate, login
 from django.template.defaulttags import csrf_token
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm
+from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm, Category
+from .forms import FarmForm
+import json
 from . import common
 
 
@@ -88,20 +90,16 @@ def farm_list(request):
 
 def get_list_of_nearby_farms(request):
     c_user = CustomUser.objects.get(email=request.user)
-    print(f"req user: { request.user}")
 
     user_location = c_user.get_location()
-    print(f"User location: {user_location}")
 
     farms = Farm.get_all_farms() # Fetch farms for the logged-in user
 
     filtered_farm_list = []
 
     for frm in farms:
-        print(f"Farm: {frm.latitude},{frm.longitude}")
-        print(f"User: {user_location}")
         var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
-        print(f"{var:.2f} km")
+        print(f"Distance wit {frm.name} : {var:.2f} km")
 
         if var < common.default_radius:
             print("added to list")
