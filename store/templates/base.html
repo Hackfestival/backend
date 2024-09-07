@@ -7,8 +7,7 @@
     <title>{% block title %}My Site{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha384-LyAB7kbUqyoRHwET56WZstKRIIT/Pp8bZr6/++c1H4vlS7xJvjUoFL98Pf4JGHp7" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha384-Y4vN1Oh/tHbByMjj5frH7dBTRU06jWGu8tS5ImomLodQ7+pIZ5GlrE0lvY5u9Riw" crossorigin=""></script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <div class="top-bar">

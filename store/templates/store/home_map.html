@@ -1,40 +1,32 @@
-{% block content %}
-<div class="home-background">
-    <!-- Map container -->
-    <div id="map" style="height: 400px; width: 100%;"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map Example</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map and set its view to a specific location and zoom level
+        var map = L.map('map').setView([51.505, -0.09], 13);
 
-<script>
-    // Initialize the map
-    var map = L.map('map').setView([0, 0], 2); // Default view (set to 0,0, zoom level 2)
+        // Add OpenStreetMap tiles to the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Add farm markers to the map
-var farms = [
-    {% for farm in farms %}
-        {
-            "name": "{{ farm.name }}",
-            "lat": {{ farm.latitude }},
-            "lng": {{ farm.longitude }}
-        }{% if not forloop.last %},{% endif %}
-    {% endfor %}
-];
-
-    farms.forEach(function(farm) {
-        L.marker([farm.lat, farm.lng]).addTo(map)
-            .bindPopup('<b>' + farm.name + '</b>')
+        // Add a marker to the map
+        L.marker([51.505, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
             .openPopup();
-    });
-
-    // Adjust map view to fit all markers
-    var bounds = new L.LatLngBounds(farms.map(f => [f.lat, f.lng]));
-    map.fitBounds(bounds);
-</script>
-
-
-{% endblock %}
-
+    </script>
+</body>
+</html>
