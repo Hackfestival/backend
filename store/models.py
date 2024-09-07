@@ -133,6 +133,15 @@ class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
 
+    def as_json(self):
+        return dict(
+            order_id=self.order_id,
+            user=self.user.email,
+            created_at=self.created_at,
+            delivered=DeliveryOrder.objects.filter(order=self).exists(),
+            items=[item.as_json() for item in self.orderitem_set.all()]
+        )
+
 
 class OrderItem(models.Model):
     order_item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
