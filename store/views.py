@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import User, Product, Cart, CartItem, OrderItem
+from .models import CustomUser, Product, Cart, CartItem, OrderItem
 
 def register(request):
     if request.user.is_authenticated:
@@ -8,7 +8,7 @@ def register(request):
         username = request.POST['username']
         password = request.POST['password']
         user_type = request.POST['user_type']  # buyer or seller
-        user = User.objects.create_user(username=username, password=password)
+        user = CustomUser.objects.create_user(username=username, password=password)
 
         return redirect('login')
 

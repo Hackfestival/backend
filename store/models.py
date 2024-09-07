@@ -27,9 +27,8 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=30, blank=True)
     first_name = models.CharField(max_length=30, blank=True)
@@ -37,9 +36,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Change the related_name
+        blank=True,
+        help_text='The groups this user belongs to.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_set',  # Change the related_name
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
 
     objects = CustomUserManager()
 
@@ -53,7 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Farm(models.Model):
     farm_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    farmer = models.ForeignKey(User, on_delete=models.CASCADE)
+    farmer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
 
@@ -99,7 +112,7 @@ class Product(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
 
 
@@ -125,7 +138,7 @@ class DeliveryOrder(models.Model):
 class Cart(models.Model):
     cart_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Each user has one cart
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Each user has one cart
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
