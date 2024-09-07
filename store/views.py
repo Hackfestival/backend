@@ -1,26 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
-from .models import BuyerProfile, SellerProfile, Product, Cart, CartItem, OrderItem
+from .models import User, Product, Cart, CartItem, OrderItem
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user_type = request.POST['user_type']  # buyer or seller
         user = User.objects.create_user(username=username, password=password)
 
-        if user_type == 'seller':
-            store_name = request.POST['store_name']
-            SellerProfile.objects.create(user=user, store_name=store_name)
-        elif user_type == 'buyer':
-            shipping_address = request.POST['shipping_address']
-            BuyerProfile.objects.create(user=user, shipping_address=shipping_address)
-
         return redirect('login')
 
     return render(request, 'store/register.html')
 
 def add_product(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     if request.method == 'POST':
         name = request.POST['name']
         description = request.POST['description']
