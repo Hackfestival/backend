@@ -13,11 +13,13 @@ from . import common
 
 
 @csrf_exempt
-@login_required
 @require_http_methods(['GET'])
 def home(request):
-    user_ = CustomUser.objects.get(email=request.user)
-    return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
+    if not request.user.is_authenticated:
+        return render(request, 'store/index.html')
+    else:
+        user_ = CustomUser.objects.get(email=request.user)
+        return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
 
 
 @csrf_exempt

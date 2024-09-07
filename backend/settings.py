@@ -87,6 +87,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_yasg.openapi.AutoSchema',
 }
 
+LOGIN_URL = '/user/login'
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
