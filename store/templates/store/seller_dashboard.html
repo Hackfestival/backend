@@ -1,17 +1,22 @@
-<h1>Orders for Your Products</h1>
+<h1>Seller Dashboard</h1>
+
 <table>
     <tr>
-        <th>Order ID</th>
-        <th>Product</th>
+        <th>Product Name</th>
         <th>Quantity</th>
         <th>Price</th>
+        <th>Status</th>
     </tr>
     {% for order in orders %}
     <tr>
-        <td>{{ order.order.id }}</td>
-        <td>{{ order.product.name }}</td>
+        <td>{{ order.product_name }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.price }}</td>
+        <td>{{ order.status }}</td>  <!-- Display order status -->
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No orders available</td>
     </tr>
     {% endfor %}
 </table>

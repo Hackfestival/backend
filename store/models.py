@@ -119,19 +119,24 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
 
 
 class OrderItem(models.Model):
-    order_item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ORDER_STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('delivered', 'Delivered'),
+        ('canceled', 'Canceled'),
+    ]
 
+    order_item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     unit = models.CharField(max_length=10, default='kg')
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='in_progress')  # Add status field
 
 
 class DeliveryOrder(models.Model):
