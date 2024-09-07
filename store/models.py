@@ -91,6 +91,9 @@ class Farm(models.Model):
     def get_all_farms():
         return Farm.objects.all()
 
+    def get_all_categories(self):
+        return Category.objects.filter(product__seller=self).distinct()
+    
     def __str__(self):
         return self.name
 

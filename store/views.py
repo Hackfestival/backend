@@ -66,7 +66,7 @@ def seller_dashboard(request):
 
 
 #######################
-######## Location CRUD
+######## Location filters
 ########################
 
 def farm_list(request):
@@ -76,23 +76,23 @@ def farm_list(request):
 
 def get_list_of_nearby_farms(request):
     c_user = CustomUser.objects.get(email=request.user)
-    print(f"req user: { request.user}")
 
     user_location = c_user.get_location()
-    print(f"User location: {user_location}")
 
     farms = Farm.get_all_farms() # Fetch farms for the logged-in user
 
     filtered_farm_list = []
 
     for frm in farms:
-        print(f"Farm: {frm.latitude},{frm.longitude}")
-        print(f"User: {user_location}")
         var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
-        print(f"{var:.2f} km")
+        print(f"Distance wit {frm.name} : {var:.2f} km")
 
         if(var < common.default_radius):
-            print("added to list")
             filtered_farm_list.append(frm)
 
     return render(request, 'store/nearby_farm.html', {'farms': filtered_farm_list})
+
+def category_filter(request):
+    farms = Farm.get_all_categories()
+
+    
