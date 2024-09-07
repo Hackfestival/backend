@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,13 +13,23 @@ from . import common
 
 
 @csrf_exempt
+@login_required
+@require_http_methods(['GET'])
+def home(request):
+    user_ = CustomUser.objects.get(email=request.user)
+    return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
+
+
+@csrf_exempt
 @require_http_methods(['GET', 'POST'])
 def user_register(request):
     if request.user.is_authenticated:
-        return JsonResponse({'status': 'error', 'message': 'User already logged in'})
+        return redirect('home')
 
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
+        new_user = None
+
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
@@ -28,7 +38,7 @@ def user_register(request):
             user_authenticated = authenticate(request, email=new_user.email, password=form.cleaned_data['password'])
             if user_authenticated:
                 login(request, user_authenticated)
-                return JsonResponse({'status': 'success', 'user_id': new_user.user_id})
+                return redirect('home')
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
 
