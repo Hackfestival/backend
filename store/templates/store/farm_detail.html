@@ -1,79 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Details - {{ farm.name }}</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f7;
-            margin: 0;
-            padding: 0;
-        }
+{% extends 'base.html' %}
+{% load static %}
 
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
+{% block title %}{{ farm.name }}{% endblock %}
 
-        h2 {
-            text-align: center;
-            color: #007bff;
-        }
+{% block extra_head %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f7;
+        margin: 0;
+        padding: 0;
+    }
 
-        .farm-info {
-            padding: 20px;
-        }
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
 
-        .farm-info h3 {
-            margin-bottom: 15px;
-            color: #343a40;
-        }
+    h2 {
+        text-align: center;
+        color: #007bff;
+    }
 
-        .farm-info p {
-            font-size: 1.2em;
-            color: #495057;
-        }
+    .farm-info {
+        padding: 20px;
+    }
 
-        .farm-image {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .farm-info h3 {
+        margin-bottom: 15px;
+        color: #343a40;
+    }
 
-        .farm-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .farm-info p {
+        font-size: 1.2em;
+        color: #495057;
+    }
 
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
+    .farm-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .btn {
-            background-color: #ff5f6d;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+    .farm-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .btn:hover {
-            background-color: #ff7f6d;
-        }
-    </style>
-</head>
-<body>
+    .back-btn {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
 
+    .btn {
+        background-color: #ff5f6d;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: #ff7f6d;
+    }
+</style>
+<script>
+    function addToCart(product_id) {
+        fetch('/user/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                product_id: product_id
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+{% endblock %}
+
+
+{% block content %}
 <div class="container">
     <h2>{{ farm.name }} - Details</h2>
 
@@ -91,12 +111,22 @@
 
         <h3>Other Info</h3>
         <p>Owned by: {{ farm.farmer.username }}</p>
+
+        <h3>Products</h3>
+
+        <ul>
+            {% for pord in products %}
+                <li class="farm-product-li">
+                    <div class="farm-product">
+                        {{ pord.name }} - ${{ pord.price }}
+                    </div>
+                    <button class="farm-product-button" onclick="addToCart('{{ pord.product_id }}')">Add to Cart</button>
+            {% endfor %}
+        </ul>
     </div>
 
     <div class="back-btn">
         <a href="{% url 'home' %}" class="btn">Back to Farms</a>
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

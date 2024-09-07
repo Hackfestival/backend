@@ -480,7 +480,6 @@ def home_view(request):
         if var < common.default_radius:
             filtered_farm_list.append(frm)
 
-
     return render(request, 'store/home_map.html', {"farms": filtered_farm_list})
 
 @login_required
@@ -488,4 +487,4 @@ def farm_detail(request, farm_id):
     # Fetch the farm by its ID
     farm = get_object_or_404(Farm, farm_id=farm_id)
 
-    return render(request, 'store/farm_detail.html', {'farm': farm})
+    return render(request, 'store/farm_detail.html', {'farm': farm, 'products': farm.get_products()})
