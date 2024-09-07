@@ -1,18 +1,5 @@
 {% block content %}
 <div class="home-background">
-    <div class="content-center">
-        <h2>Welcome, {{ user.username }}</h2>
-
-        <h3>Farms near you:</h3>
-        <ul class="farm-list">
-            {% for farm in farms %}
-                <li>
-                    <button class="farm-button">{{ farm.name }}</button>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
     <!-- Map container -->
     <div id="map" style="height: 400px; width: 100%;"></div>
 </div>

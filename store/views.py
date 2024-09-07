@@ -434,3 +434,20 @@ def farm_order_deliver(request):
     new_delivery = order.deliver(delivery_address=user_.get_location(), delivery_time=datetime.now(), delivery_fee=0)
 
     return JsonResponse({'status': 'success', 'delivery_id': new_delivery.delivery_id})
+
+def home_view(request):
+    c_user = CustomUser.objects.get(email=request.user)
+    user_location = c_user.get_location()
+    farms = Farm.get_all_farms()  # Fetch farms for the logged-in user
+    filtered_farm_list = []
+
+    for frm in farms:
+        var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
+        if var < common.default_radius:
+            filtered_farm_list.append(frm)
+
+    context = {
+        'filtered_farm_list': filtered_farm_list
+    }
+
+    return render(request, 'store/home_map.html', context)
