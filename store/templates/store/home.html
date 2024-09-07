@@ -11,9 +11,7 @@
         <h3>Farms near you:</h3>
         <ul class="farm-list">
             {% for farm in farms %}
-                <li>
-                    <button class="farm-button">{{ farm.name }}</button>
-                </li>
+                <li> <a href="farm/{{ farm.farm_id }}">{{ farm.name }}</a></li>
             {% endfor %}
         </ul>
     </div>

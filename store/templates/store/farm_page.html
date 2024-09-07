@@ -1,0 +1,50 @@
+<!-- store/templates/store/farm_page.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ farm.name }}{% endblock %}
+
+{% block extra_head %}
+<script>
+    function addToCart(product_id) {
+        fetch('/user/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                product_id: product_id
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="home-background">
+    <div class="content-center">
+        <h2>{{ farm.name }}</h2>
+
+        <h3>{{ farm.description }}</h3>
+
+        <h3>Products</h3>
+
+        <ul>
+            {% for pord in products %}
+                <li class="farm-product-li">
+                    <div class="farm-product">
+                        {{ pord.name }} - ${{ pord.price }}
+                    </div>
+                    <button class="farm-product-button" onclick="addToCart('{{ pord.product_id }}')">Add to Cart</button>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

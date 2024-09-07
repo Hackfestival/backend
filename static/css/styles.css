@@ -167,3 +167,35 @@ body::before {
     background-color: #45a049;
     box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2); /* Füge einen Schatten beim Hover hinzu */
 }
+
+.farm-product-li {
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex; /* Flexbox aktivieren */
+    justify-content: space-between; /* Platz zwischen den Elementen */
+    align-items: center; /* Zentriert die Elemente vertikal */
+}
+
+.farm-product {
+    flex-grow: 1; /* Lässt das div den verfügbaren Platz einnehmen */
+}
+
+.farm-product-button {
+    padding: 10px 20px; /* Größeres Padding für mehr Platz */
+    background-color: #4CAF50; /* Primärfarbe */
+    color: white; /* Textfarbe */
+    border: none; /* Kein Rahmen */
+    border-radius: 5px; /* Abgerundete Ecken */
+    cursor: pointer; /* Zeiger-Cursor */
+    font-size: 1em; /* Schriftgröße */
+    font-weight: bold; /* Fettschrift */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schatten */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Übergangsanimationen */
+}
+
+.farm-product-button:hover {
+    background-color: #45a049; /* Hover-Farbe */
+    transform: translateY(-2px); /* Leichter Aufwärtseffekt beim Hover */
+}

@@ -60,7 +60,7 @@ def user_login(request):
 
             if user_authenticated:
                 login(request, user_authenticated)
-                return JsonResponse({'status': 'success', 'user_id': user_authenticated.user_id})
+                return redirect('home')
 
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
@@ -434,3 +434,19 @@ def farm_order_deliver(request):
     new_delivery = order.deliver(delivery_address=user_.get_location(), delivery_time=datetime.now(), delivery_fee=0)
 
     return JsonResponse({'status': 'success', 'delivery_id': new_delivery.delivery_id})
+
+
+@csrf_exempt
+@login_required
+@require_http_methods(['GET'])
+def farm_page(request, farm_id):
+    try:
+        farm = Farm.objects.get(farm_id=farm_id)
+    except Farm.DoesNotExist:
+        return redirect('home')
+
+    products = farm.get_products()
+
+    print(products)
+
+    return render(request, 'store/farm_page.html', {'farm': farm, 'products': products})
