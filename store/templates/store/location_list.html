@@ -1,0 +1,25 @@
+<h2>Locations</h2>
+<a href="{% url 'create_location' %}">Add Location</a>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.name }}</td>
+            <td>{{ location.latitude }}</td>
+            <td>{{ location.longitude }}</td>
+            <td>
+                <a href="{% url 'update_location' location.pk %}">Edit</a> |
+                <a href="{% url 'delete_location' location.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

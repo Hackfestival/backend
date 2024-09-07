@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CustomUser, Product, Cart, CartItem, OrderItem
+from .models import CustomUser, Product, Cart, CartItem, OrderItem, Location
+from .forms import LocationForm
 
 def register(request):
     if request.user.is_authenticated:
@@ -23,7 +24,7 @@ def add_product(request):
         description = request.POST['description']
         price = request.POST['price']
         stock = request.POST['stock']
-        seller = SellerProfile.objects.get(user=request.user)
+        #seller = SellerProfile.objects.get(user=request.user)
         Product.objects.create(name=name, description=description, price=price, stock=stock, seller=seller)
         return redirect('seller_dashboard')
 
@@ -47,7 +48,49 @@ def add_to_cart(request, product_id):
         return render(request, 'store/out_of_stock.html')
 
 def seller_dashboard(request):
-    seller = SellerProfile.objects.get(user=request.user)
+    #seller = SellerProfile.objects.get(user=request.user)
     # Get all the order items that contain the seller's products
     orders = OrderItem.objects.filter(product__seller=seller)
     return render(request, 'store/seller_dashboard.html', {'orders': orders})
+
+
+#######################
+######## Location CRUD
+########################
+
+# Create a new location
+def create_location(request):
+    if request.method == 'POST':
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('location_list') 
+    else:
+        form = LocationForm()
+    return render(request, 'store/location_form.html', {'form': form})
+
+# List all locations
+def location_list(request):
+    locations = Location.objects.all()
+    return render(request, 'store/location_list.html', {'locations': locations})
+
+# Edit an existing location
+def update_location(request, pk):
+    location = Location.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = LocationForm(request.POST, instance=location)
+        if form.is_valid():
+            form.save()
+            return redirect('location_list')
+    else:
+        form = LocationForm(instance=location)
+    return render(request, 'store/location_form.html', {'form': form})
+
+# Delete a location
+def delete_location(request, pk):
+    location = Location.objects.get(pk=pk)
+    if request.method == 'POST':
+        location.delete()
+        return redirect('location_list')
+    return render(request, 'store/confirm_delete.html', {'location': location})
+
