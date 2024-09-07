@@ -440,6 +440,10 @@ def farm_order_deliver(request):
     return JsonResponse({'status': 'success', 'delivery_id': new_delivery.delivery_id})
 
 def home_view(request):
+
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+
     c_user = CustomUser.objects.get(email=request.user)
     user_location = c_user.get_location()
     farms = Farm.get_all_farms()  # Fetch farms for the logged-in user
