@@ -66,6 +66,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_location(self):
         return self.latitude, self.longitude
 
+    def as_json(self):
+        return dict(
+            user_id=self.user_id,
+            email=self.email,
+            username=self.username,
+            first_name=self.first_name,
+            last_name=self.last_name,
+            is_active=self.is_active,
+            is_staff=self.is_staff,
+            date_joined=self.date_joined,
+            latitude=self.latitude,
+            longitude=self.longitude
+        )
+
     def __str__(self):
         return self.email
 
@@ -93,7 +107,20 @@ class Farm(models.Model):
 
     def get_all_categories(self):
         return Category.objects.filter(product__seller=self).distinct()
-    
+
+    def get_products(self):
+        return Product.objects.filter(seller=self)
+
+    def as_json(self):
+        return dict(
+            farm_id=self.farm_id,
+            farmer=self.farmer.email,
+            name=self.name,
+            description=self.description,
+            latitude=self.latitude,
+            longitude=self.longitude
+        )
+
     def __str__(self):
         return self.name
 
@@ -126,8 +153,10 @@ class Product(models.Model):
         if self.stock >= quantity:
             self.stock -= quantity
             self.save()
+
+            return True
         else:
-            raise ValueError('Not enough stock available')
+            return False
 
 
 class Order(models.Model):
@@ -135,6 +164,9 @@ class Order(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
+
+    def deliver(self, delivery_address, delivery_time, delivery_fee):
+        return DeliveryOrder.objects.create(order=self, delivery_address=delivery_address, delivery_time=delivery_time, delivery_fee=delivery_fee)
 
     def as_json(self):
         return dict(
@@ -170,6 +202,19 @@ class Cart(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Each user has one cart
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def list_items(self):
+        return self.cartitem_set.all()
+
+    def checkout(self):
+        new_order = Order.objects.create(user=self.user)
+
+        for item in self.list_items():
+            OrderItem.objects.create(order=new_order, product=item.product, quantity=item.quantity, unit=item.unit, price=item.product.price)
+
+        self.list_items().delete()
+
+        return new_order.order_id
 
     def __str__(self):
         return f'Cart of {self.user.username}'
