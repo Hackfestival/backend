@@ -18,9 +18,17 @@ def home(request):
     if not request.user.is_authenticated:
         return render(request, 'store/index.html')
     else:
-        user_ = CustomUser.objects.get(email=request.user)
-        return render(request, 'store/home.html', {'user': user_, 'farms': Farm.get_all_farms()})
+        c_user = CustomUser.objects.get(email=request.user)
+        user_location = c_user.get_location()
+        farms = Farm.get_all_farms()  # Fetch farms for the logged-in user
+        filtered_farm_list = []
 
+        for frm in farms:
+            var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
+            if var < common.default_radius:
+                filtered_farm_list.append(frm)
+
+        return render(request, 'store/home_map.html', {"farms": filtered_farm_list})
 
 @csrf_exempt
 @require_http_methods(['GET', 'POST'])

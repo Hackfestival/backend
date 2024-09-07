@@ -5,7 +5,9 @@ default_radius = 2
 # Haversine formula to calculate distance between two points on the Earth
 def haversine(lat1, lon1, lat2, lon2):
     # Convert latitude and longitude from degrees to radians
-    print(lat1, lon1, lat2, lon2)
+    if lat1 is None or lon1 is None or lat2 is None or lon2 is None:
+        return default_radius
+
     lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
 
     # Haversine formula
