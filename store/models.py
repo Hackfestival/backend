@@ -62,6 +62,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_orders(self):
         return Order.objects.filter(user=self)
+    
+    def get_location(self):
+        return self.latitude, self.longitude
 
     def __str__(self):
         return self.email
@@ -81,8 +84,12 @@ class Farm(models.Model):
         return self.latitude, self.longitude
 
     @staticmethod
-    def get_all_location(self):
-        return Farm.objects.values_list('latitude', 'longitude')
+    def get_all_location():
+        return list(Farm.objects.values_list('name', 'description','latitude', 'longitude'))
+    
+    @staticmethod
+    def get_all_farms():
+        return Farm.objects.all()
 
     def __str__(self):
         return self.name

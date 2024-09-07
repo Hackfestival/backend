@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 
 from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm
 from .forms import FarmForm
+from . import common
 
 def register(request):
     if request.user.is_authenticated:
@@ -75,6 +76,29 @@ def seller_dashboard(request):
 
 @login_required
 def farm_list(request):
-    print(request.user)
-    farms = Farm.objects.filter(farmer=request.user)  # Fetch farms for the logged-in user
+    farms = Farm.get_all_farms() # Fetch farms for the logged-in user
+    print(f"Farm: {farms}")
     return render(request, 'store/farm_list.html', {'farms': farms})
+
+def get_list_of_nearby_farms(request):
+    c_user = CustomUser.objects.get(email=request.user)
+    print(f"req user: { request.user}")
+
+    user_location = c_user.get_location()
+    print(f"User location: {user_location}")
+
+    farms = Farm.get_all_farms() # Fetch farms for the logged-in user
+
+    filtered_farm_list = []
+
+    for frm in farms:
+        print(f"Farm: {frm.latitude},{frm.longitude}")
+        print(f"User: {user_location}")
+        var = common.haversine(frm.latitude, frm.longitude, user_location[0], user_location[1])
+        print(f"{var:.2f} km")
+
+        if(var < common.default_radius):
+            print("added to list")
+            filtered_farm_list.append(frm)
+
+    return render(request, 'store/nearby_farm.html', {'farms': filtered_farm_list})
