@@ -9,8 +9,5 @@ urlpatterns = [
 
     path('seller_dashboard/', views.seller_dashboard, name='seller_dashboard'),
 
-    path('location/', views.location_list, name='location_list'),  # List all locations
-    path('location/create/', views.create_location, name='create_location'),  # Create a new location
-    path('location/edit/<int:pk>/', views.update_location, name='update_location'),  # Update a location
-    path('location/delete/<int:pk>/', views.delete_location, name='delete_location'),  # Delete a location
+    path('farms/', views.farm_list, name='farm_list'),  # List farms
 ]

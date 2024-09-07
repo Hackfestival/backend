@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CustomUser, Product, Cart, CartItem, OrderItem, Location
-from .forms import LocationForm
+from .models import CustomUser, Product, Cart, CartItem, OrderItem, Farm
+from .forms import FarmForm
 
 def register(request):
     if request.user.is_authenticated:
@@ -58,39 +58,7 @@ def seller_dashboard(request):
 ######## Location CRUD
 ########################
 
-# Create a new location
-def create_location(request):
-    if request.method == 'POST':
-        form = LocationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('location_list') 
-    else:
-        form = LocationForm()
-    return render(request, 'store/location_form.html', {'form': form})
-
-# List all locations
-def location_list(request):
-    locations = Location.objects.all()
-    return render(request, 'store/location_list.html', {'locations': locations})
-
-# Edit an existing location
-def update_location(request, pk):
-    location = Location.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = LocationForm(request.POST, instance=location)
-        if form.is_valid():
-            form.save()
-            return redirect('location_list')
-    else:
-        form = LocationForm(instance=location)
-    return render(request, 'store/location_form.html', {'form': form})
-
-# Delete a location
-def delete_location(request, pk):
-    location = Location.objects.get(pk=pk)
-    if request.method == 'POST':
-        location.delete()
-        return redirect('location_list')
-    return render(request, 'store/confirm_delete.html', {'location': location})
-
+def farm_list(request):
+    print(request.user)
+    farms = Farm.objects.filter(farmer=request.user)  # Fetch farms for the logged-in user
+    return render(request, 'store/farm_list.html', {'farms': farms})

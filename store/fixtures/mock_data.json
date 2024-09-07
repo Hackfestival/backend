@@ -1,0 +1,49 @@
+[
+    {
+        "model": "store.customuser",
+        "pk": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
+        "fields": {
+            "email": "john.doe@example.com",
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "is_active": true,
+            "is_staff": false,
+            "latitude": 52.5200,
+            "longitude": 13.4050,
+            "password": "pbkdf2_sha256$320000$ZpDjRh...$CqiG...",
+            "date_joined": "2023-09-06T12:00:00Z"
+        }
+    },
+    {
+        "model": "store.category",
+        "pk": "1f75d9f6-123e-4a11-bc4e-6349b9aeffdd",
+        "fields": {
+            "name": "Fruits",
+            "description": "Fresh and organic fruits"
+        }
+    },
+    {
+        "model": "store.farm",
+        "pk": "91cd5efb-6b49-49d5-9a14-567e5c57b23f",
+        "fields": {
+            "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
+            "name": "Green Valley Farm",
+            "description": "A family-run organic farm",
+            "latitude": 48.8566,
+            "longitude": 2.3522
+        }
+    },
+    {
+        "model": "store.product",
+        "pk": "eef72db1-935e-474e-b5af-4c0f2ffb2f82",
+        "fields": {
+            "name": "Apples",
+            "description": "Fresh organic apples",
+            "price": "3.50",
+            "stock": 100,
+            "category": "1f75d9f6-123e-4a11-bc4e-6349b9aeffdd",
+            "seller": "91cd5efb-6b49-49d5-9a14-567e5c57b23f"
+        }
+    }
+]

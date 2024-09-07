@@ -1,7 +1,7 @@
 from django import forms
-from .models import Location
+from .models import Farm
 
-class LocationForm(forms.ModelForm):
+class FarmForm(forms.ModelForm):
     class Meta:
-        model = Location
-        fields = ['name', 'latitude', 'longitude']
+        model = Farm
+        fields = ['name', 'description', 'latitude', 'longitude']

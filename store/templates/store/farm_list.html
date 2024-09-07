@@ -1,0 +1,22 @@
+<h2>Farms</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for farm in farms %}
+        <tr>
+            <td>{{ farm.name }}</td>
+            <td>{{ farm.description }}</td>
+            <td>{{ farm.latitude }}</td>
+            <td>{{ farm.longitude }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

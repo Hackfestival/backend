@@ -36,6 +36,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
 
@@ -72,6 +73,13 @@ class Farm(models.Model):
 
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
+
+    def get_location(self):
+        return self.latitude, self.longitude
+
+    @staticmethod
+    def get_all_location(self):
+        return Farm.objects.values_list('latitude', 'longitude')
 
     def __str__(self):
         return self.name
@@ -155,11 +163,3 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} {self.unit} x {self.product.name}'
-    
-class Location(models.Model):
-    name = models.CharField(max_length=255)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
-
-    def __str__(self):
-        return self.name
