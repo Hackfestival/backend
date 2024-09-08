@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Checkout items styles */
+        .checkout-items {
+            margin-bottom: 25px;
+        }
+
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            align-items: center;
+        }
+
+        .checkout-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #444;
+        }
+
+        .item-price {
+            color: #28a745;
+            font-size: 18px;
+        }
+
+        /* Total price styling */
+        .total {
+            text-align: right;
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #28a745;
+            border-top: 2px solid #f1f1f1;
+            padding-top: 20px;
+        }
+
+        /* Button styles */
+        .confirm-btn, .back-btn {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #218838;
+        }
+
+        .back-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background-color: #138496;
+        }
+
+        /* Flexbox for buttons */
+        .action-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .action-btns a {
+            width: 48%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+
+        <div class="checkout-items">
+            {% for item in cart_items %}
+            <div class="checkout-item">
+                <span class="item-name">{{ item.name }} (x{{ item.quantity }})</span>
+                <span class="item-price">€{{ item.subtotal }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="total">
+            Total: €{{ total_price }}
+        </div>
+
+        <div class="action-btns">
+            <a href="{% url 'user_cart_confirm' %}" class="confirm-btn">Confirm Order</a>
+            <a href="{% url 'user_cart_list' %}" class="back-btn">Go Back to Cart</a>
+        </div>
+    </div>
+</body>
+</html>

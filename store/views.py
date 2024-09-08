@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser, Product, Cart, CartItem, Farm, Order
 from .forms import UserRegistrationForm, UserLoginForm, ProductForm, UserCartAddForm, UserUpdateForm, FarmUpdateForm
 from . import common
-
+from datetime import datetime, timedelta
 
 @csrf_exempt
 @require_http_methods(['GET'])
@@ -571,3 +571,31 @@ def cart_view(request):
     }
 
     return render(request, 'store/user_cart_display.html', context)
+
+def user_cart_checkout_dummy(request):
+    # Dummy cart data
+    cart_items = [
+        {'product_id': 1, 'name': 'Apple', 'price': 2.5, 'quantity': 3, 'subtotal': 7.5},
+    ]
+    
+    # Calculate total price
+    total_price = sum(item['subtotal'] for item in cart_items)
+
+    if request.method == "POST":
+        # Dummy order confirmation and cart clearance
+        return redirect('order_confirmation')  # Simulate successful order
+
+    return render(request, 'store/user_checkout.html', {
+        'cart_items': cart_items,
+        'total_price': total_price,
+    })
+
+def user_cart_confirm(request):
+    # Dummy data for the confirmation page
+    context = {
+        'order_number': '123456',  # You can generate this dynamically
+        'total_price': 150.00,     # Total amount from the order
+        'delivery_date': (datetime.now() + timedelta(days=5)).strftime('%Y-%m-%d'),  # Estimated delivery in 5 days
+    }
+    
+    return render(request, 'store/user_cart_confirm.html', context)
