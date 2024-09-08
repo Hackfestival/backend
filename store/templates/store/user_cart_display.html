@@ -134,6 +134,40 @@
             margin-top: 30px;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to update the subtotal for a product
+            function updateSubtotal(inputElement) {
+                let quantity = inputElement.value;
+                let price = parseFloat(inputElement.dataset.price);
+                let subtotalElement = inputElement.closest('tr').querySelector('.subtotal');
+                let subtotal = (quantity * price).toFixed(2);
+                subtotalElement.textContent = '€' + subtotal;
+
+                // Update total after changing quantity
+                updateTotal();
+            }
+
+            // Function to update the total for the entire cart
+            function updateTotal() {
+                let total = 0;
+                document.querySelectorAll('.subtotal').forEach(function(subtotalElement) {
+                    total += parseFloat(subtotalElement.textContent.replace('€', ''));
+                });
+                document.querySelector('.cart-total').textContent = 'Total: €' + total.toFixed(2);
+            }
+
+            // Attach event listeners to quantity input fields
+            document.querySelectorAll('.quantity-input').forEach(function(inputElement) {
+                inputElement.addEventListener('change', function() {
+                    updateSubtotal(this);
+                });
+            });
+
+            // Trigger the initial total calculation on page load
+            updateTotal();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -156,19 +190,12 @@
                         <span class="product-name">Apple</span>
                     </td>
                     <td>
-                        <form class="quantity-form">
-                            <input type="hidden" name="product_id" value="0">
-                            <input type="number" name="quantity" value="3" min="1" style="width: 60px;">
-                            <button type="submit" class="update-btn">Update</button>
-                        </form>
+                        <input type="number" class="quantity-input" name="quantity" value="3" min="1" style="width: 60px;" data-price="2.5">
                     </td>
                     <td>€2.5</td>
-                    <td>€7.5</td>
+                    <td class="subtotal">€7.5</td> <!-- Subtotal is calculated -->
                     <td>
-                        <form>
-                            <input type="hidden" name="product_id" value="0">
-                            <button type="submit" class="remove-btn">Remove</button>
-                        </form>
+                        <button type="button" class="remove-btn">Remove</button>
                     </td>
                 </tr>
                 <!-- Repeat for other products -->
@@ -181,7 +208,6 @@
 
         <div class="action-btns">
             <a href="{% url 'user_cart_checkout' %}" class="checkout-btn">Proceed to Checkout</a>
-            <a href="{% url 'user_cart_clear' %}" class="clear-cart-btn">Clear Cart</a>
             <a href="{% url 'home' %}" class="farm-detail">Go Back</a>
         </div>
     </div>

@@ -9,15 +9,15 @@
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to right, #00b09b, #96c93d); /* Green gradient */
+        background: linear-gradient(to right, #00b09b, #96c93d); /* Soft green gradient */
         margin: 0;
         padding: 0;
     }
 
     h2 {
         text-align: center;
-        font-size: 2em;
-        color: white;
+        font-size: 2.5em;
+        color: #ffffff;
         margin: 20px 0;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -31,70 +31,109 @@
     }
 
     table {
-        width: 80%;
-        margin: 20px 0;
+        width: 85%;
+        margin-top: 30px;
         border-collapse: collapse;
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
-        background-color: white;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #ffffff;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Softer shadow */
+        transition: transform 0.3s ease;
+    }
+
+    table:hover {
+        transform: scale(1.02); /* Subtle hover effect */
     }
 
     th, td {
-        padding: 15px;
+        padding: 18px; /* Increased padding for a more spacious feel */
         text-align: center;
         border-bottom: 1px solid #dee2e6;
+        font-size: 1.2em;
     }
 
     th {
-        background-color: #28a745; /* Dark green */
+        background-color: #028090; /* A more vibrant green-blue */
         color: #ffffff;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
     td {
-        color: #495057;
+        color: #343a40; /* Darker gray for better readability */
     }
 
     tr:hover {
-        background-color: #e9f7e1; /* Light green hover effect */
+        background-color: #e0f7fa; /* Light teal hover effect */
     }
 
     #map {
         height: 500px;
-        width: 80%;
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        width: 85%;
+        margin-top: 30px;
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     }
 
     /* Button Styling */
     .btn {
-        background-color: #38b477; /* Green */
-        background-image: linear-gradient(315deg, #38b477 0%, #a3e635 74%); /* Green gradient */
+        background-color: #38b477; /* Brighter green for action buttons */
+        background-image: linear-gradient(315deg, #38b477 0%, #5cc67a 74%);
         color: white;
-        padding: 10px 20px;
+        padding: 12px 24px;
         border: none;
         cursor: pointer;
         text-decoration: none;
         font-size: 1.2em;
         margin-top: 20px;
-        border-radius: 5px;
-        transition: background 0.3s ease;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.3s ease;
     }
 
     .btn:hover {
-        background-image: linear-gradient(315deg, #5cc674 0%, #c6ec66 74%);
+        background-image: linear-gradient(315deg, #5cc67a 0%, #a3e635 74%);
+        transform: scale(1.05); /* Slight hover effect */
     }
 
     /* Smaller button inside popup */
     .btn-small {
-        font-size: 0.8em; /* Reduced font size */
-        padding: 5px 10px; /* Reduced padding */
-        border-radius: 3px; /* Slightly smaller border-radius */
+        font-size: 0.9em;
+        padding: 6px 12px;
+        border-radius: 5px;
+    }
+
+    /* Adjusting link color inside popup */
+    .leaflet-popup-content a {
+        color: #05668d;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .leaflet-popup-content a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        table, #map {
+            width: 95%;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        td, th {
+            padding: 12px;
+            font-size: 1em;
+        }
+
+        .btn {
+            font-size: 1em;
+        }
     }
 </style>
+
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
@@ -159,9 +198,6 @@
         </tbody>
     </table>
 
-    
-
-    <a href="#" class="btn">Back to Home</a>
+    <a href="/" class="btn">Back to Home</a>
 </div>
-
 {% endblock %}
