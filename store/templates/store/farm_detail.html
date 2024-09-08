@@ -129,26 +129,67 @@
     .btn:hover {
         background-color: #ff7f6d;
     }
+
+    /* Modal Styles */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 999; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; 
+        background-color: rgba(0, 0, 0, 0.5); 
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    .modal-content h3 {
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+
+    .modal-close-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .modal-close-btn:hover {
+        background-color: #0056b3;
+    }
 </style>
 
 <script>
-    function addToCart(product_id) {
-        fetch('/user/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({
-                product_id: product_id
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-        }).catch(error => {
-            console.error('Error:', error);
-        });
+    // Function to show modal popup
+    function showModal(message) {
+        const modal = document.getElementById('cartModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
+
+    // Function to close modal
+    function closeModal() {
+        const modal = document.getElementById('cartModal');
+        modal.style.display = 'none';
+    }
+
+    // Function to simulate adding item to cart (notification only, no actual cart logic)
+    function addToCart(productName) {
+        showModal(`${productName} added to your cart!`);
     }
 </script>
 {% endblock %}
@@ -182,16 +223,26 @@
                     <div class="product-title">{{ product.name }}</div>
                     <div class="product-price">€{{ product.price }}</div>
                     <div class="product-desc">{{ product.description }}</div>
-                    <button class="farm-product-button">Add to Cart</button>
+                    <button class="farm-product-button" onclick="addToCart('{{ product.name }}')">Add to Cart</button>
                 </div>
-            {% empty %}
-                <p>No products available for this farm.</p>
-            {% endfor %}
+                {% empty %}
+                    <p>No products available for this farm.</p>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="back-btn">
+            <a href="{% url 'home' %}" class="btn">Back to Farms</a>
         </div>
     </div>
-
-    <div class="back-btn">
-        <a href="{% url 'home' %}" class="btn">Back to Farms</a>
+    
+    <!-- Modal Popup for Cart Notification -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalMessage"></h3>
+            <button class="modal-close-btn" onclick="closeModal()">Close</button>
+        </div>
     </div>
-</div>
-{% endblock %}
+    
+    {% endblock %}
+    
