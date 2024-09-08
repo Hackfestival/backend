@@ -51,27 +51,6 @@
             font-weight: bold;
         }
 
-        .cart-table td .quantity-form input {
-            width: 40px;
-            text-align: center;
-        }
-
-        .cart-table td .remove-btn {
-            background-color: red;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cart-table td .update-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-
         .cart-total {
             text-align: right;
             margin-top: 20px;
@@ -79,7 +58,7 @@
             font-weight: bold;
         }
 
-        .checkout-btn {
+        .checkout-btn, .payment-btn {
             display: inline-block;
             padding: 10px 20px;
             background-color: #28a745;
@@ -89,7 +68,21 @@
             margin-top: 20px;
         }
 
-        .checkout-btn:hover {
+        .checkout-btn:hover, .payment-btn:hover {
+            opacity: 0.8;
+        }
+
+        .clear-cart-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .clear-cart-btn:hover {
             opacity: 0.8;
         }
     </style>
@@ -98,58 +91,53 @@
     <div class="container">
         <h1>Your Shopping Cart</h1>
 
-        {% if cart_items %}
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
-                    <tr>
-                        <td>
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                            <span class="product-name">{{ item.product.name }}</span>
-                        </td>
-                        <td>
-                            <!-- Quantity Form -->
-                            <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                                <button type="submit" class="update-btn">Update</button>
-                            </form>
-                        </td>
-                        <td>${{ item.product.price }}</td>
-                        <td>${{ item.get_total_price }}</td>
-                        <td>
-                            <!-- Remove Form -->
-                            <form action="{% url 'user_cart_remove' %}" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                                <button type="submit" class="remove-btn">Remove</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in selected_products %}
+                <tr>
+                    <td>
+                        <img src="{% static 'images/product.jpg' %}" alt="{{ item.name }}">
+                        <span class="product-name">{{ item.name }}</span>
+                    </td>
+                    <td>
+                        <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                            <input type="number" name="quantity" value="1" min="1">
+                            <button type="submit" class="update-btn">Update</button>
+                        </form>
+                    </td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>
+                        <form action="{% url 'user_cart_remove' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                            <button type="submit" class="remove-btn">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <div class="cart-total">
-                Total: ${{ cart_total }}
-            </div>
+        <div class="cart-total">
+            Total: ${{ cart_total }}
+        </div>
 
-            <a href="{% url 'user_cart_checkout' %}" class="checkout-btn">Proceed to Checkout</a>
-
-        {% else %}
-            <p>Your cart is empty.</p>
-            <a href="/products" class="checkout-btn">Continue Shopping</a>
-        {% endif %}
+        <a href="{% url 'user_cart_checkout' %}" class="checkout-btn">Proceed to Checkout</a>
+        <a href="{% url 'user_cart_payment' %}" class="payment-btn">Payment Page</a>
+        <a href="{% url 'user_cart_clear' %}" class="clear-cart-btn">Clear Cart</a>
+        <a href="{% url 'home' %}" class="farm-detail">Go Back</a>
     </div>
 </body>
 </html>
