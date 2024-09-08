@@ -550,3 +550,24 @@ def farm_detail(request, farm_id):
     farm = get_object_or_404(Farm, farm_id=farm_id)
 
     return render(request, 'store/farm_detail.html', {'farm': farm, 'products': farm.get_products()})
+
+@login_required
+def cart_view(request):
+    # Get the current user's cart
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = CartItem.objects.filter(cart=user_cart)
+
+    # Add subtotal for each cart item (product price * quantity)
+    for item in cart_items:
+        item.subtotal = item.product.price * item.quantity
+
+    # Calculate the total cost
+    cart_total = sum(item.subtotal for item in cart_items)
+
+    # Pass selected products and total cost to the template
+    context = {
+        'selected_products': cart_items,
+        'cart_total': cart_total
+    }
+
+    return render(request, 'store/user_cart_display.html', context)

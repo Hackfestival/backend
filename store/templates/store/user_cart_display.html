@@ -102,31 +102,27 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in selected_products %}
                 <tr>
                     <td>
-                        <img src="{% static 'images/product.jpg' %}" alt="{{ item.name }}">
-                        <span class="product-name">{{ item.name }}</span>
+                        <img src="{% static 'images/apple.jpg' %}" alt="{{ item.product.name }}">
+                        <span class="product-name">Apple</span>
                     </td>
                     <td>
-                        <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
-                            <input type="number" name="quantity" value="1" min="1">
+                        <form class="quantity-form">
+                            <input type="hidden" name="product_id" value="0">
+                            <input type="number" name="quantity" value="3" min="1">
                             <button type="submit" class="update-btn">Update</button>
                         </form>
                     </td>
-                    <td>${{ item.price }}</td>
-                    <td>${{ item.price }}</td>
+                    <td>€2.5</td>
+                    <td>€7.5</td> <!-- Subtotal is calculated in the view -->
                     <td>
-                        <form action="{% url 'user_cart_remove' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                        <form >
+                            <input type="hidden" name="product_id" value="0">
                             <button type="submit" class="remove-btn">Remove</button>
                         </form>
                     </td>
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
 
