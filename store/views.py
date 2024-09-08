@@ -52,7 +52,8 @@ def user_register(request):
             user_authenticated = authenticate(request, email=new_user.email, password=form.cleaned_data['password'])
             if user_authenticated:
                 login(request, user_authenticated)
-                return redirect('home')
+                # return redirect('home')
+                return render(request, 'store/farm_list.html')
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
 
@@ -75,7 +76,8 @@ def user_login(request):
 
             if user_authenticated:
                 login(request, user_authenticated)
-                return redirect('home')
+                # return redirect('farm_list')
+                return render(request, 'store/farm_list.html')
 
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
@@ -118,7 +120,8 @@ def user_cart_list(request):
 
     user_cart_items = user_cart.list_items()
 
-    return JsonResponse({'status': 'success', 'products': list(user_cart_items.values())})
+    #return JsonResponse({'status': 'success', 'products': list(user_cart_items.values())})
+    return render(request, 'store/user_cart_display.html', {'form': UserRegistrationForm()})
 
 
 @csrf_exempt
