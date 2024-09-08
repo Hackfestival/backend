@@ -9,8 +9,8 @@
             "last_name": "Doe",
             "is_active": true,
             "is_staff": false,
-            "latitude": 48.8563,
-            "longitude": 2.3527,
+            "latitude": 49.4865,
+            "longitude": 8.4700,
             "password": "pbkdf2_sha256$320000$ZpDjRh...$CqiG...",
             "date_joined": "2023-09-06T12:00:00Z"
         }
@@ -25,8 +25,8 @@
             "last_name": "Smith",
             "is_active": true,
             "is_staff": true,
-            "latitude": 48.8563,
-            "longitude": 2.3527,
+            "latitude": 49.4865,
+            "longitude": 8.4700,
             "password": "pbkdf2_sha256$320000$abc123...$def456...",
             "date_joined": "2024-01-15T09:30:00Z"
         }
@@ -41,8 +41,8 @@
             "last_name": "Johnson",
             "is_active": true,
             "is_staff": false,
-            "latitude": 48.8563,
-            "longitude": 2.3527,
+            "latitude": 49.4865,
+            "longitude": 8.4700,
             "password": "pbkdf2_sha256$320000$ghi789...$jkl012...",
             "date_joined": "2024-03-10T15:00:00Z"
         }
@@ -78,8 +78,8 @@
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Green Valley Farm",
             "description": "A family-run organic farm",
-            "latitude": 48.8566,
-            "longitude": 2.3522
+            "latitude": 49.4882,
+            "longitude": 8.4655
         }
     },
     {
@@ -89,8 +89,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Sunny Acres Farm",
             "description": "A farm specializing in vegetables",
-            "latitude": 40.7128,
-            "longitude": -74.0060
+            "latitude": 49.4905,
+            "longitude": 8.4690
         }
     },
     {
@@ -100,8 +100,8 @@
             "farmer": "b9c5d2a1-2d6c-4f70-b1e3-7a6c8d4b5f6a",
             "name": "Rose Garden Farm",
             "description": "A farm focusing on flowers and herbs",
-            "latitude": 47.6062,
-            "longitude": -122.3321
+            "latitude": 49.4870,
+            "longitude": 8.4620
         }
     },
     {
@@ -111,8 +111,8 @@
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Riverbend Farm",
             "description": "A picturesque farm by the river",
-            "latitude": 48.8530,
-            "longitude": 2.3470
+            "latitude": 49.4860,
+            "longitude": 8.4670
         }
     },
     {
@@ -122,8 +122,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Lakeside Farm",
             "description": "A tranquil farm near the lake",
-            "latitude": 48.8590,
-            "longitude": 2.3550
+            "latitude": 49.4877,
+            "longitude": 8.4665
         }
     },
     {
@@ -133,8 +133,8 @@
             "farmer": "b9c5d2a1-2d6c-4f70-b1e3-7a6c8d4b5f6a",
             "name": "Hillside Farm",
             "description": "A farm on the gentle hillside",
-            "latitude": 48.8570,
-            "longitude": 2.3600
+            "latitude": 49.4868,
+            "longitude": 8.4645
         }
     },
     {
@@ -144,8 +144,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Countryside Farm",
             "description": "A traditional farm with open fields",
-            "latitude": 48.8535,
-            "longitude": 2.3590
+            "latitude": 49.4883,
+            "longitude": 8.4610
         }
     },
     {
@@ -251,8 +251,8 @@
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Forest Glade Farm",
             "description": "A charming farm in a wooded area",
-            "latitude": 48.8540,
-            "longitude": 2.3480
+            "latitude": 49.4855,
+            "longitude": 8.4690
         }
     },
     {
@@ -262,8 +262,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Meadowbrook Farm",
             "description": "A serene farm with meadows",
-            "latitude": 48.8530,
-            "longitude": 2.3540
+            "latitude": 49.4895,
+            "longitude": 8.4635
         }
     },
     {
@@ -273,8 +273,8 @@
             "farmer": "b9c5d2a1-2d6c-4f70-b1e3-7a6c8d4b5f6a",
             "name": "Willow Creek Farm",
             "description": "A picturesque farm by a creek",
-            "latitude": 48.8550,
-            "longitude": 2.3570
+            "latitude": 49.4880,
+            "longitude": 8.4650
         }
     },
     {
@@ -284,8 +284,8 @@
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Oak Hill Farm",
             "description": "A farm with oak trees and open fields",
-            "latitude": 48.8520,
-            "longitude": 2.3600
+            "latitude": 49.4862,
+            "longitude": 8.4680
         }
     },
     {
@@ -295,8 +295,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Green Meadows Farm",
             "description": "A lush farm with green meadows",
-            "latitude": 48.8560,
-            "longitude": 2.3580
+            "latitude": 49.4890,
+            "longitude": 8.4660
         }
     }
 ]

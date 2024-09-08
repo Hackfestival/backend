@@ -44,8 +44,8 @@ def user_register(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
 
-            new_user.latitude = 48.8563
-            new_user.longitude = 2.3527
+            new_user.latitude = 49.4865
+            new_user.longitude = 8.4700
 
             new_user.save()
 
