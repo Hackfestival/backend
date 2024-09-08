@@ -122,6 +122,11 @@ def user_cart_list(request):
 
     #return JsonResponse({'status': 'success', 'products': list(user_cart_items.values())})
     return render(request, 'store/user_cart_display.html', {'form': UserRegistrationForm()})
+@csrf_exempt
+@login_required
+@require_http_methods(['GET', 'POST'])
+def user_cart_payment(request):
+    return render(request, 'store/user_cart_payment')
 
 
 @csrf_exempt
