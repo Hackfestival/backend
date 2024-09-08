@@ -51,34 +51,6 @@
             font-weight: bold;
         }
 
-        .cart-table td .quantity-form input {
-            width: 40px;
-            text-align: center;
-        }
-
-        .cart-table td .remove-btn, .cart-table td .add-btn, .cart-table td .clear-btn, .cart-table td .update-btn {
-            padding: 5px 10px;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cart-table td .remove-btn {
-            background-color: red;
-        }
-
-        .cart-table td .add-btn {
-            background-color: #28a745;
-        }
-
-        .cart-table td .clear-btn {
-            background-color: #dc3545;
-        }
-
-        .cart-table td .update-btn {
-            background-color: #007bff;
-        }
-
         .cart-total {
             text-align: right;
             margin-top: 20px;
@@ -119,7 +91,6 @@
     <div class="container">
         <h1>Your Shopping Cart</h1>
 
-        <!-- Mock products in the cart -->
         <table class="cart-table">
             <thead>
                 <tr>
@@ -131,85 +102,42 @@
                 </tr>
             </thead>
             <tbody>
+                {% for item in selected_products %}
                 <tr>
                     <td>
-                        <img src="{% static 'images/product1.jpg' %}" alt="Product 1">
-                        <span class="product-name">Product 1</span>
+                        <img src="{% static 'images/product.jpg' %}" alt="{{ item.name }}">
+                        <span class="product-name">{{ item.name }}</span>
                     </td>
                     <td>
                         <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="product_id" value="1">
-                            <input type="number" name="quantity" value="2" min="1">
-                            <button type="submit" class="update-btn">Update</button>
-                        </form>
-                    </td>
-                    <td>$10.00</td>
-                    <td>$20.00</td>
-                    <td>
-                        <form action="{% url 'user_cart_remove' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="1">
-                            <button type="submit" class="remove-btn">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="{% static 'images/product2.jpg' %}" alt="Product 2">
-                        <span class="product-name">Product 2</span>
-                    </td>
-                    <td>
-                        <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="2">
+                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
                             <input type="number" name="quantity" value="1" min="1">
                             <button type="submit" class="update-btn">Update</button>
                         </form>
                     </td>
-                    <td>$15.00</td>
-                    <td>$15.00</td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.price }}</td>
                     <td>
                         <form action="{% url 'user_cart_remove' %}" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="product_id" value="2">
+                            <input type="hidden" name="product_id" value="{{ item.product_id }}">
                             <button type="submit" class="remove-btn">Remove</button>
                         </form>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <img src="{% static 'images/product3.jpg' %}" alt="Product 3">
-                        <span class="product-name">Product 3</span>
-                    </td>
-                    <td>
-                        <form class="quantity-form" action="{% url 'user_cart_add' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="3">
-                            <input type="number" name="quantity" value="3" min="1">
-                            <button type="submit" class="update-btn">Update</button>
-                        </form>
-                    </td>
-                    <td>$12.00</td>
-                    <td>$36.00</td>
-                    <td>
-                        <form action="{% url 'user_cart_remove' %}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="product_id" value="3">
-                            <button type="submit" class="remove-btn">Remove</button>
-                        </form>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
 
         <div class="cart-total">
-            Total: $71.00
+            Total: ${{ cart_total }}
         </div>
 
         <a href="{% url 'user_cart_checkout' %}" class="checkout-btn">Proceed to Checkout</a>
-        <a href="{% url 'payment_page' %}" class="payment-btn">Payment Page</a>
+        <a href="{% url 'user_cart_payment' %}" class="payment-btn">Payment Page</a>
         <a href="{% url 'user_cart_clear' %}" class="clear-cart-btn">Clear Cart</a>
+        <a href="{% url 'home' %}" class="farm-detail">Go Back</a>
     </div>
 </body>
 </html>

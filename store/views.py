@@ -1,3 +1,5 @@
+import json
+import random
 from datetime import datetime
 from django.views.decorators.http import require_http_methods
 
@@ -77,7 +79,7 @@ def user_login(request):
             if user_authenticated:
                 login(request, user_authenticated)
                 # return redirect('farm_list')
-                return render(request, 'store/farm_list.html')
+                return redirect('user_cart_list')
 
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
@@ -122,11 +124,54 @@ def user_cart_list(request):
 
     #return JsonResponse({'status': 'success', 'products': list(user_cart_items.values())})
     return render(request, 'store/user_cart_display.html', {'form': UserRegistrationForm()})
+
+def cart_view(request):
+    # Load the product data from a JSON file
+    with open('store/fixtures/mock_data.json', 'r') as file:
+        data = json.load(file)
+
+    # Assuming products are stored in the 'products' key
+    products = data['products']
+
+    # Select three random products from the JSON data
+    selected_products = random.sample(products, 3)
+
+    # Calculate total cost
+    cart_total = sum(product['price'] for product in selected_products)
+
+    # Pass selected products and total cost to the template
+    context = {
+        'cart_items': selected_products,
+        'cart_total': cart_total
+    }
+
+    return render(request, 'store/user_cart_display.html', context)
 @csrf_exempt
 @login_required
 @require_http_methods(['GET', 'POST'])
 def user_cart_payment(request):
-    return render(request, 'store/user_cart_payment')
+    # Get the user's cart and cart items
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
+
+    # Check if the cart is empty
+    if not cart_items.exists():
+        return redirect('user_cart_list')
+
+    # Calculate the total cost of the cart
+    cart_total = sum(item.product.price * item.quantity for item in cart_items)
+
+    # If this is a POST request (the user submits the payment form), we'll just mock the success
+    if request.method == 'POST':
+        # Simulate a successful payment (no actual payment processing here)
+        return redirect('payment_success')
+
+    # Render the mock payment page with the cart items and total
+    context = {
+        'cart_items': cart_items,
+        'cart_total': cart_total,
+    }
+    return render(request, 'store/payment_page.html', context)
 
 
 @csrf_exempt
