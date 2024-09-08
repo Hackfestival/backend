@@ -79,7 +79,7 @@ def user_login(request):
             if user_authenticated:
                 login(request, user_authenticated)
                 # return redirect('farm_list')
-                return redirect('user_cart_list')
+                return redirect('/')
 
             return JsonResponse({'status': 'error', 'message': 'Authentication failed'})
         return JsonResponse({'status': 'error', 'message': 'Form is not valid', 'errors': form.errors})
