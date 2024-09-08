@@ -1,0 +1,51 @@
+{% block content %}
+<div class="home-background">
+    <div class="content-center">
+        <h2>Welcome, {{ user.username }}</h2>
+
+        <h3>Farms near you:</h3>
+        <ul class="farm-list">
+            {% for farm in farms %}
+                <li> <a href="farm/{{ farm.farm_id }}">{{ farm.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Map container -->
+    <div id="map" style="height: 400px; width: 100%;"></div>
+</div>
+
+<script>
+    // Initialize the map
+    var map = L.map('map').setView([0, 0], 2); // Default view (set to 0,0, zoom level 2)
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add farm markers to the map
+    var farms = [
+        {% for farm in farms %}
+            {
+                "name": "{{ farm.name }}",
+                "lat": {{ farm.latitude }},
+                "lng": {{ farm.longitude }}
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    farms.forEach(function(farm) {
+        L.marker([farm.lat, farm.lng]).addTo(map)
+            .bindPopup('<b>' + farm.name + '</b>')
+            .openPopup();
+    });
+
+    // Adjust map view to fit all markers
+    var bounds = new L.LatLngBounds(farms.map(f => [f.lat, f.lng]));
+    map.fitBounds(bounds);
+</script>
+
+
+{% endblock %}
+

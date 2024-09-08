@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ farm.name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f7;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 30px;
+    }
+
+    .farm-frame, .products-frame {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .farm-frame {
+        background-color: #e9f5ff;
+    }
+
+    .products-frame {
+        background-color: #fff7e6;
+    }
+
+    .farm-frame h3, .products-frame h3 {
+        color: #343a40;
+    }
+
+    .farm-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .farm-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .product-price {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #28a745;
+    }
+
+    .product-desc {
+        font-size: 1em;
+        margin-bottom: 15px;
+        color: #6c757d;
+    }
+
+    .farm-product-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 0.9em;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .farm-product-button:hover {
+        background-color: #0056b3;
+    }
+
+    .back-btn {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        background-color: #ff5f6d;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: #ff7f6d;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 999; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; 
+        background-color: rgba(0, 0, 0, 0.5); 
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    .modal-content h3 {
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+
+    .modal-close-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .modal-close-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<script>
+    // Function to show modal popup
+    function showModal(message) {
+        const modal = document.getElementById('cartModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
+
+    // Function to close modal
+    function closeModal() {
+        const modal = document.getElementById('cartModal');
+        modal.style.display = 'none';
+    }
+
+    // Function to simulate adding item to cart (notification only, no actual cart logic)
+    function addToCart(productName) {
+        showModal(`${productName} added to your cart!`);
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ farm.name }} - Details</h2>
+
+    <!-- Farm Info Frame -->
+    <div class="farm-frame">
+        <div class="farm-image">
+            <img src="{% static 'images/background.jpg' %}" alt="Farm Image">
+        </div>
+
+        <div class="farm-info">
+            <h3>Farm Information</h3>
+            <p><strong>Description:</strong> {{ farm.description }}</p>
+
+            <p><strong>Location:</strong> Latitude: {{ farm.latitude }}, Longitude: {{ farm.longitude }}</p>
+
+            <p><strong>Owned by:</strong> {{ farm.farmer.username }}</p>
+        </div>
+    </div>
+
+    <!-- Products Frame -->
+    <div class="products-frame">
+        <h3>Available Products</h3>
+        <div class="products-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-title">{{ product.name }}</div>
+                    <div class="product-price">€{{ product.price }}</div>
+                    <div class="product-desc">{{ product.description }}</div>
+                    <button class="farm-product-button" onclick="addToCart('{{ product.name }}')">Add to Cart</button>
+                </div>
+                {% empty %}
+                    <p>No products available for this farm.</p>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="back-btn">
+            <a href="{% url 'home' %}" class="btn">Back to Farms</a>
+        </div>
+    </div>
+    
+    <!-- Modal Popup for Cart Notification -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalMessage"></h3>
+            <button class="modal-close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    
+    {% endblock %}
+    

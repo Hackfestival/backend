@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block title %}Farms Map{% endblock %}
+
+{% block extra_head %}
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Custom CSS for styling -->
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #00b09b, #96c93d); /* Soft green gradient */
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2.5em;
+        color: #ffffff;
+        margin: 20px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    table {
+        width: 85%;
+        margin-top: 30px;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #ffffff;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Softer shadow */
+        transition: transform 0.3s ease;
+    }
+
+    table:hover {
+        transform: scale(1.02); /* Subtle hover effect */
+    }
+
+    th, td {
+        padding: 18px; /* Increased padding for a more spacious feel */
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+        font-size: 1.2em;
+    }
+
+    th {
+        background-color: #028090; /* A more vibrant green-blue */
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    td {
+        color: #343a40; /* Darker gray for better readability */
+    }
+
+    tr:hover {
+        background-color: #e0f7fa; /* Light teal hover effect */
+    }
+
+    #map {
+        height: 500px;
+        width: 85%;
+        margin-top: 30px;
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Button Styling */
+    .btn {
+        background-color: #38b477; /* Brighter green for action buttons */
+        background-image: linear-gradient(315deg, #38b477 0%, #5cc67a 74%);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 1.2em;
+        margin-top: 20px;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+        background-image: linear-gradient(315deg, #5cc67a 0%, #a3e635 74%);
+        transform: scale(1.05); /* Slight hover effect */
+    }
+
+    /* Smaller button inside popup */
+    .btn-small {
+        font-size: 0.9em;
+        padding: 6px 12px;
+        border-radius: 5px;
+    }
+
+    /* Adjusting link color inside popup */
+    .leaflet-popup-content a {
+        color: #05668d;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .leaflet-popup-content a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        table, #map {
+            width: 95%;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        td, th {
+            padding: 12px;
+            font-size: 1em;
+        }
+
+        .btn {
+            font-size: 1em;
+        }
+    }
+</style>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the map with a default view, we'll adjust the zoom later
+        var map = L.map('map').setView([0, 0], 2); // Start with a neutral view
+
+        // Add a tile layer (OpenStreetMap in this case)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Create an array to hold all the farm markers
+        var markers = [];
+
+        // Add markers for each farm with a popup including a "More Info" link
+        {% for farm in farms %}
+        var marker = L.marker([{{ farm.latitude }}, {{ farm.longitude }}])
+            .bindPopup('<strong>{{ farm.name }}</strong><br>{{ farm.description }}<br><a href="{% url "farm_detail" farm.farm_id %}" class="btn btn-small">More Info</a>');
+        markers.push(marker);  // Add marker to array
+        marker.addTo(map);  // Add marker to the map
+        {% endfor %}
+
+        // Create a feature group containing all markers
+        var group = L.featureGroup(markers);
+
+        // Fit the map to the bounds of the marker group
+        map.fitBounds(group.getBounds());
+    });
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div id="container">
+    <h2>Farms Map</h2>
+    <div id="map"></div>
+
+    <h2>Farms</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>More Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for farm in farms %}
+            <tr>
+                <td>{{ farm.name }}</td>
+                <td>{{ farm.description }}</td>
+                <td>{{ farm.latitude }}</td>
+                <td>{{ farm.longitude }}</td>
+                <td><a href="{% url 'farm_detail' farm.farm_id %}" class="btn">More Info</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/" class="btn">Back to Home</a>
+</div>
+{% endblock %}

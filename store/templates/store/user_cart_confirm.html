@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #e6ee9c);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #28a745;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Order summary section */
+        .order-details {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-details h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #495057;
+        }
+
+        .order-details p {
+            margin-bottom: 10px;
+        }
+
+        .order-details strong {
+            font-weight: 700;
+            color: #28a745;
+        }
+
+        /* Button styles */
+        .home-btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Animation for container */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmed!</h1>
+        <p>Your order has been successfully placed. Thank you for shopping with us!</p>
+
+        <div class="order-details">
+            <h3>Order Summary</h3>
+            <p>Order Number: <strong>{{ order_number }}</strong></p>
+            <p>Total Amount: <strong>€{{ total_price }}</strong></p>
+            <p>Estimated Delivery: <strong>{{ delivery_date }}</strong></p>
+        </div>
+
+        <a href="{% url 'home' %}" class="home-btn">Go to Home</a>
+    </div>
+</body>
+</html>

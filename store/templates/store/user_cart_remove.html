@@ -1,0 +1,16 @@
+<!-- store/templates/store/user_cart_remove.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove Product from Cart</title>
+</head>
+<body>
+    <h2>Remove Product from Cart</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Remove from Cart</button>
+    </form>
+</body>
+</html>
