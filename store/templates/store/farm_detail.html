@@ -13,7 +13,7 @@
     }
 
     .container {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 20px auto;
         padding: 20px;
         background-color: #ffffff;
@@ -24,20 +24,27 @@
     h2 {
         text-align: center;
         color: #007bff;
+        margin-bottom: 30px;
     }
 
-    .farm-info {
+    .farm-frame, .products-frame {
+        background-color: #ffffff;
+        border-radius: 10px;
         padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .farm-info h3 {
-        margin-bottom: 15px;
+    .farm-frame {
+        background-color: #e9f5ff;
+    }
+
+    .products-frame {
+        background-color: #fff7e6;
+    }
+
+    .farm-frame h3, .products-frame h3 {
         color: #343a40;
-    }
-
-    .farm-info p {
-        font-size: 1.2em;
-        color: #495057;
     }
 
     .farm-image {
@@ -52,10 +59,63 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-title {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .product-price {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #28a745;
+    }
+
+    .product-desc {
+        font-size: 1em;
+        margin-bottom: 15px;
+        color: #6c757d;
+    }
+
+    .farm-product-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 0.9em;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .farm-product-button:hover {
+        background-color: #0056b3;
+    }
+
     .back-btn {
         display: block;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 30px;
     }
 
     .btn {
@@ -70,6 +130,7 @@
         background-color: #ff7f6d;
     }
 </style>
+
 <script>
     function addToCart(product_id) {
         fetch('/user/cart/add', {
@@ -92,37 +153,41 @@
 </script>
 {% endblock %}
 
-
 {% block content %}
 <div class="container">
     <h2>{{ farm.name }} - Details</h2>
 
-    <div class="farm-image">
-      <img src="{% static 'images/background.jpg' %}" alt="No image sucker">
+    <!-- Farm Info Frame -->
+    <div class="farm-frame">
+        <div class="farm-image">
+            <img src="{% static 'images/background.jpg' %}" alt="Farm Image">
+        </div>
+
+        <div class="farm-info">
+            <h3>Farm Information</h3>
+            <p><strong>Description:</strong> {{ farm.description }}</p>
+
+            <p><strong>Location:</strong> Latitude: {{ farm.latitude }}, Longitude: {{ farm.longitude }}</p>
+
+            <p><strong>Owned by:</strong> {{ farm.farmer.username }}</p>
+        </div>
     </div>
 
-    <div class="farm-info">
-        <h3>Description</h3>
-        <p>{{ farm.description }}</p>
-
-        <h3>Location</h3>
-        <p>Latitude: {{ farm.latitude }}</p>
-        <p>Longitude: {{ farm.longitude }}</p>
-
-        <h3>Other Info</h3>
-        <p>Owned by: {{ farm.farmer.username }}</p>
-
-        <h3>Products</h3>
-
-        <ul>
-            {% for pord in products %}
-                <li class="farm-product-li">
-                    <div class="farm-product">
-                        {{ pord.name }} - ${{ pord.price }}
-                    </div>
-                    <button class="farm-product-button" onclick="addToCart('{{ pord.product_id }}')">Add to Cart</button>
+    <!-- Products Frame -->
+    <div class="products-frame">
+        <h3>Available Products</h3>
+        <div class="products-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-title">{{ product.name }}</div>
+                    <div class="product-price">${{ product.price }}</div>
+                    <div class="product-desc">{{ product.description }}</div>
+                    <button class="farm-product-button">Add to Cart</button>
+                </div>
+            {% empty %}
+                <p>No products available for this farm.</p>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 
     <div class="back-btn">

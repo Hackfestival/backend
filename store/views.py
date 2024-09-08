@@ -247,6 +247,15 @@ def product_list(request):
 
         return JsonResponse({'status': 'success', 'products': list(products.values())})
 
+def farm_detail_view(request, farm_uuid):
+    # Fetch the farm by UUID
+    farm = get_object_or_404(Farm, farm_id=farm_uuid)
+    
+    # Fetch all products related to the farm
+    products = Product.objects.filter(seller=farm)
+
+    # Pass the farm and products to the template
+    return render(request, 'store/farm_detail.html', {'farm': farm, 'products': products})
 
 @csrf_exempt
 @login_required

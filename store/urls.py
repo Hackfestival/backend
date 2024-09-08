@@ -12,8 +12,8 @@ urlpatterns = [
     path('user/update', views.user_update, name='user_update'),
     path('user/delete', views.user_delete, name='user_delete'),
 
-    path('user/cart/display', views.user_cart_list, name='user_cart_list'),
-    #path('user/cart/list', views.user_cart_list, name='user_cart_list'),
+    #path('user/cart/display', views.user_cart_list, name='user_cart_list'),
+    path('user/cart/list', views.user_cart_list, name='user_cart_list'),
     path('user/cart/add', views.user_cart_add, name='user_cart_add'),
     path('user/cart/remove', views.user_cart_remove, name='user_cart_remove'),
     path('user/cart/clear', views.user_cart_clear, name='user_cart_clear'),
@@ -21,8 +21,8 @@ urlpatterns = [
     path('user/order/list', views.user_order_list, name='user_order_list'),
     path('user/farm/nearby', views.user_farm_nearby, name='user_farm_nearby'),
 
-
     path('farm/list', views.farm_list, name='farm_list'),
+    path('farm/<uuid:farm_uuid>/', views.farm_detail_view, name='farm_detail'),
     path('farm/<uuid:farm_id>/', views.farm_detail, name='farm_detail'),
 
     path('farm/detail', views.farm_detail, name='farm_detail'),

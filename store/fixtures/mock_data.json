@@ -1,276 +1,4 @@
 [
-
-    {
-        "model": "store.customuser",
-        "pk": "1d99a6fe-f0b4-4751-9fe1-989fda780ec7",
-        "fields": {
-            "email": "vnguyen@baldwin-greene.net",
-            "username": "uwalker",
-            "first_name": "Jason",
-            "last_name": "Alexander",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 84.364063,
-            "longitude": 59.602523,
-            "password": "pbkdf2_sha256$320000$b8ed2408...$2be45b31",
-            "date_joined": "2024-09-07T23:55:40.098834Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "e4c5c984-2023-44af-a501-585c10a4b3f2",
-        "fields": {
-            "email": "icantu@kirby.com",
-            "username": "stevennewton",
-            "first_name": "Darlene",
-            "last_name": "Arnold",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": -32.070987,
-            "longitude": -129.498226,
-            "password": "pbkdf2_sha256$320000$7c84455d...$8583ac66",
-            "date_joined": "2024-09-07T23:55:40.100186Z"
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "3f7e0fe6-79c8-4573-9a34-142a3d2e30b8",
-        "fields": {
-            "farmer": "e4c5c984-2023-44af-a501-585c10a4b3f2",
-            "name": "Sanchez Group Farm",
-            "description": "Coach human she generation campaign center be.",
-            "latitude": -52.340676,
-            "longitude": 115.65285
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "ce291413-4679-4231-8b07-7cdf6c559003",
-        "fields": {
-            "farmer": "fa303f52-7955-4950-998d-80882390212f",
-            "name": "Duffy, Hodges and Luna Farm",
-            "description": "Though fill most health final identify.",
-            "latitude": -10.546534,
-            "longitude": -41.450436
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "633bad5a-63f0-4084-928d-7a992264f18c",
-        "fields": {
-            "farmer": "6f972b2e-a9f8-40d1-9d1b-eb1b05e280eb",
-            "name": "Walker LLC Farm",
-            "description": "You quality region purpose.",
-            "latitude": -43.168126,
-            "longitude": -61.460304
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "d8c417fb-a548-4952-8a9d-efbcdac40db9",
-        "fields": {
-            "farmer": "2908b98f-fb3a-4b24-bb62-7300f39bc800",
-            "name": "Hunter, Woods and Ward Farm",
-            "description": "Real enough ago modern own left.",
-            "latitude": 89.197805,
-            "longitude": 16.451758
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "4e3d7c24-b6d2-4001-88a0-33f0832f0286",
-        "fields": {
-            "farmer": "a323561a-ff31-4680-80f0-b4bb9e79e197",
-            "name": "Villanueva-Kirk Farm",
-            "description": "Health language couple seek which still weight staff.",
-            "latitude": -70.462268,
-            "longitude": -81.265687
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "cd94ca8c-a926-47e8-a0ee-69d46f9a3d40",
-        "fields": {
-            "farmer": "9331c7c7-91ab-41de-b192-e8fc55141a62",
-            "name": "Humphrey Ltd Farm",
-            "description": "Type argue executive church executive kid.",
-            "latitude": -26.338544,
-            "longitude": -29.250104
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "aa3f6b99-5888-4d1d-975c-8d63f53954c5",
-        "fields": {
-            "farmer": "b631138a-02ea-4a5c-a9b2-18c086a12e60",
-            "name": "Ferguson-Rodriguez Farm",
-            "description": "Impact no give suggest remain ask.",
-            "latitude": -58.480274,
-            "longitude": 81.454443
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "010c11ce-299f-4454-a126-fa86ea967130",
-        "fields": {
-            "farmer": "450429ce-f4f4-498d-a3d7-da279f16e090",
-            "name": "Lewis-Carroll Farm",
-            "description": "Charge century century provide increase choice because that.",
-            "latitude": 45.384922,
-            "longitude": 67.977165
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "1fd58352-96cd-4b99-bbab-8aad5f761f7a",
-        "fields": {
-            "farmer": "922bb3e4-17bb-4106-a630-0c77967a6ac9",
-            "name": "White, Vasquez and Bass Farm",
-            "description": "Specific reach either nation against drop.",
-            "latitude": 29.360158,
-            "longitude": 15.511218
-        }
-    },
-    {
-        "model": "store.farm",
-        "pk": "e6d1325f-6aef-458f-abae-5750e81b1820",
-        "fields": {
-            "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
-            "name": "Reyes PLC Farm",
-            "description": "Every bag suffer perform draw skill skill.",
-            "latitude": -24.514994,
-            "longitude": 111.649912
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "fa303f52-7955-4950-998d-80882390212f",
-        "fields": {
-            "email": "carrillomichelle@hotmail.com",
-            "username": "cjackson",
-            "first_name": "Daniel",
-            "last_name": "Myers",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$3eee479c...$a8a3ca8f",
-            "date_joined": "2024-09-07T23:55:40.101192Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "6f972b2e-a9f8-40d1-9d1b-eb1b05e280eb",
-        "fields": {
-            "email": "mary30@hudson.info",
-            "username": "jeffreycortez",
-            "first_name": "Brandon",
-            "last_name": "Montoya",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$c8475a45...$425a4f06",
-            "date_joined": "2024-09-07T23:55:40.102325Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "2908b98f-fb3a-4b24-bb62-7300f39bc800",
-        "fields": {
-            "email": "chapmanjon@yahoo.com",
-            "username": "sphillips",
-            "first_name": "Michele",
-            "last_name": "Boyer",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$e31d777e...$3a4b2d8d",
-            "date_joined": "2024-09-07T23:55:40.103146Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "a323561a-ff31-4680-80f0-b4bb9e79e197",
-        "fields": {
-            "email": "nancythompson@shaw.org",
-            "username": "zhoffman",
-            "first_name": "Tyler",
-            "last_name": "Stark",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$3749b83b...$13ed8a2a",
-            "date_joined": "2024-09-07T23:55:40.103922Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "9331c7c7-91ab-41de-b192-e8fc55141a62",
-        "fields": {
-            "email": "adam46@hotmail.com",
-            "username": "quinnolivia",
-            "first_name": "Rebecca",
-            "last_name": "Manning",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$4501ae0c...$24ea34c6",
-            "date_joined": "2024-09-07T23:55:40.104522Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "b631138a-02ea-4a5c-a9b2-18c086a12e60",
-        "fields": {
-            "email": "hammondaaron@yahoo.com",
-            "username": "rsmith",
-            "first_name": "Zachary",
-            "last_name": "Espinoza",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$77c1a890...$45fc2a8d",
-            "date_joined": "2024-09-07T23:55:40.105392Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "450429ce-f4f4-498d-a3d7-da279f16e090",
-        "fields": {
-            "email": "andersonkathryn@hotmail.com",
-            "username": "wongnicole",
-            "first_name": "Scott",
-            "last_name": "Hicks",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$2c95d14f...$dda785aa",
-            "date_joined": "2024-09-07T23:55:40.106082Z"
-        }
-    },
-    {
-        "model": "store.customuser",
-        "pk": "922bb3e4-17bb-4106-a630-0c77967a6ac9",
-        "fields": {
-            "email": "elizabethroy@hall-carlson.com",
-            "username": "veronica91",
-            "first_name": "Gary",
-            "last_name": "Alvarez",
-            "is_active": true,
-            "is_staff": false,
-            "latitude": 49.4865,
-            "longitude": 8.4700,
-            "password": "pbkdf2_sha256$320000$42c40bac...$a0ad726d",
-            "date_joined": "2024-09-07T23:55:40.106909Z"
-        }
-    }
-,
     {
         "model": "store.customuser",
         "pk": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
@@ -329,87 +57,6 @@
     },
     {
         "model": "store.category",
-        "pk": "3e2b33f1-b8f6-49e6-b34c-cf5eafd5c35e",
-        "fields": {
-            "name": "Current",
-            "description": "Including by cell."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "879cd60d-8d91-4f85-a8c0-f4399f725283",
-        "fields": {
-            "name": "Information",
-            "description": "Audience forward research carry far."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "a21a32ba-a759-48f5-b12a-7deb2d00b2c0",
-        "fields": {
-            "name": "Mother",
-            "description": "Really spring mission."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "c524d87a-009f-464a-8eb6-2b196a36ac57",
-        "fields": {
-            "name": "Despite",
-            "description": "Recently player building participant."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "ac7f18ec-23b6-4cad-84e3-9d1b76826fc6",
-        "fields": {
-            "name": "Choose",
-            "description": "Ball hold skin region and leg soon box."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "52eafb78-fd3e-4756-85e2-4bc839d7a288",
-        "fields": {
-            "name": "Official",
-            "description": "Claim nothing consumer."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "93ab66bd-de4a-4a8b-9057-0a855cd0fba3",
-        "fields": {
-            "name": "Spend",
-            "description": "Whatever significant sport four say individual."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "a7884b82-e209-43df-bbed-b0d06361a1ee",
-        "fields": {
-            "name": "Choose",
-            "description": "Few best culture partner strong result."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "4271b32d-c0a8-4be3-8622-330d50156728",
-        "fields": {
-            "name": "Human",
-            "description": "Give weight about and gun key."
-        }
-    },
-    {
-        "model": "store.category",
-        "pk": "3ee169c3-4722-445e-bf53-27e5e54af105",
-        "fields": {
-            "name": "Bag",
-            "description": "Little bar usually back group cover."
-        }
-    }
-,
-    {
-        "model": "store.category",
         "pk": "c2f8e0d2-8d1e-4f5d-8970-d64e4bb1d91a",
         "fields": {
             "name": "Vegetables",
@@ -424,10 +71,9 @@
             "description": "Various culinary and medicinal herbs"
         }
     },
-
     {
         "model": "store.farm",
-        "pk": "c1774646-235f-40ba-8f33-b30073212eeb",
+        "pk": "91cd5efb-6b49-49d5-9a14-567e5c57b23f",
         "fields": {
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Green Valley Farm",
@@ -443,8 +89,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Sunny Acres Farm",
             "description": "A farm specializing in vegetables",
-            "latitude": 40.7128,
-            "longitude": -74.0060
+            "latitude": 49.4905,
+            "longitude": 8.4690
         }
     },
     {
@@ -454,8 +100,8 @@
             "farmer": "b9c5d2a1-2d6c-4f70-b1e3-7a6c8d4b5f6a",
             "name": "Rose Garden Farm",
             "description": "A farm focusing on flowers and herbs",
-            "latitude": 47.6062,
-            "longitude": -122.3321
+            "latitude": 49.4870,
+            "longitude": 8.4620
         }
     },
     {
@@ -465,8 +111,8 @@
             "farmer": "3f6b7ae2-799c-4b2e-bf9a-5c44e26f8b88",
             "name": "Riverbend Farm",
             "description": "A picturesque farm by the river",
-            "latitude": 48.8530,
-            "longitude": 2.3470
+            "latitude": 49.4860,
+            "longitude": 8.4670
         }
     },
     {
@@ -476,8 +122,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Lakeside Farm",
             "description": "A tranquil farm near the lake",
-            "latitude": 48.8590,
-            "longitude": 2.3550
+            "latitude": 49.4877,
+            "longitude": 8.4665
         }
     },
     {
@@ -487,8 +133,8 @@
             "farmer": "b9c5d2a1-2d6c-4f70-b1e3-7a6c8d4b5f6a",
             "name": "Hillside Farm",
             "description": "A farm on the gentle hillside",
-            "latitude": 48.8570,
-            "longitude": 2.3600
+            "latitude": 49.4868,
+            "longitude": 8.4645
         }
     },
     {
@@ -498,8 +144,8 @@
             "farmer": "a2b5dfe3-6d6c-4f16-b5c5-3f6e7f58a1f1",
             "name": "Countryside Farm",
             "description": "A traditional farm with open fields",
-            "latitude": 48.8535,
-            "longitude": 2.3590
+            "latitude": 49.4883,
+            "longitude": 8.4610
         }
     },
     {

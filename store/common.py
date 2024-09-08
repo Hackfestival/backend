@@ -1,6 +1,6 @@
 import math
 
-default_radius = 2
+default_radius = 4
 
 # Haversine formula to calculate distance between two points on the Earth
 def haversine(lat1, lon1, lat2, lon2):
